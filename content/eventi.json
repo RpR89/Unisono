@@ -1,0 +1,49 @@
+{
+  "eventi": [
+    {
+      "slug": "live-mixing-school-2026",
+      "tipo": "evento",
+      "visibile": true,
+      "titolo": "LIVE MIXING SCHOOL 2026",
+      "locandina": "assets/img/Mixing-School-2026-scaled.png",
+      "immagine_home": "",
+      "testo": "<h2>LIVE MIXING SCHOOL</h2><h3>“Il mestiere del live sound engineer”</h3><h3>(cosa deve e non deve fare un fonico professionista)</h3><h3>Il set-up perfetto.</h3><p>PALAZZO GUARNIERI FELTRE (BL)</p><p>Lunedì 2 novembre 2026</p><p>Un’intera giornata con uno dei migliori fonici italiani</p><h2>Andrea Corsellini</h2><p>Si lavorerà su esempi pratici per cogliere al meglio tutti i preziosi consigli di Andrea.</p><p>Grazie alla partnership con Yamaha sarà disponibile una console Rivage insieme a uno specialista di prodotto per ogni approfondimento sulla serie PM.</p><p>Per informazioni e iscrizioni : 388 7884850</p><p><a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a></p><p>www.liveworks.it – www.unisonofactory.com</p><p><strong>POSTI LIMITATI</strong></p>"
+    },
+    {
+      "slug": "m-s-s-m",
+      "tipo": "evento",
+      "visibile": true,
+      "titolo": "M.S.S.M",
+      "locandina": "assets/img/MCCOMB-scaled.png",
+      "immagine_home": "assets/img/MCCOMB.jpg",
+      "testo": "<h2>M.S.S.M</h2><h3><strong>live at Unisono</strong></h3><p>Frank McComb</p><p>Marcello Sutera</p><p>Francesco Mendolia</p><p>Donato Sensini</p><p><em><strong>Venerdì 22 ottobre – ore 21.30</strong></em></p><p><em><strong>Sabato 23 ottobre – ore 19.30 e ore 21.30</strong></em></p><p>MODERN HALL – PALAZZO GUARNIERI</p><p>Per informazioni:</p><p>388 7884850</p><p><a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a></p><p>www.unisonofactory.com</p>"
+    },
+    {
+      "slug": "rita-marcotulli-ensemble",
+      "tipo": "evento",
+      "visibile": true,
+      "titolo": "RITA MARCOTULLI – ENSEMBLE",
+      "locandina": "assets/img/RITA-MARCOTULLI-ENSEMBLE-scaled.png",
+      "immagine_home": "",
+      "testo": "<h2>RITA MARCOTULLI <em>ENSEMBLE</em></h2><p><em>UNDER 29 BUT ME</em></p><p>RITA MARCOTULLI – pianoforte<br>ELETTRA MINIERI – tastiere<br>AVA ALAMI – voce<br>ANDREA CARDONE – sassofono<br>DAMIANO DE MATTEIS – contrabbasso<br>DANIELE BUCCI – batteria</p><p><strong>SABATO 25 APRILE 2026</strong><br>Doppio set ore 19.30 e 21.30<br><strong>Modern Hall Palazzo Guarnieri – Feltre</strong></p><p>Per informazioni e iscrizioni :</p><p>388 7884850</p><p><a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a></p><p>www.unisonofactory.com</p>"
+    },
+    {
+      "slug": "new-direction-live-at-unisono-studios",
+      "tipo": "novita",
+      "visibile": true,
+      "titolo": "NEW DIRECTION live at Unisono Studios",
+      "locandina": "assets/img/UNISONOn1_0.5-cover1.jpg-scaled.jpeg",
+      "immagine_home": "",
+      "testo": "<h2>“New Direction”</h2><p>live AT UNISONO STUDIOS</p><p><em><strong>disponibile dal 10 aprile sulle piattaforme di streaming</strong></em></p><p>PER UNA PREVIEW <em><strong><a href=\"https://www.youtube.com/watch?v=zR7FrvQxuVg\" target=\"_blank\">CLICCA QUI</a></strong></em></p><p>Per informazioni:</p><p>388 7884850</p><p><a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a></p><p>www.unisonofactory.com</p>"
+    },
+    {
+      "slug": "alvise-bortoloni-2",
+      "tipo": "novita",
+      "visibile": true,
+      "titolo": "Solitude di DANILO MEMOLI",
+      "locandina": "assets/img/WhatsApp-Image-2026-03-13-at-08.49.29.jpeg",
+      "immagine_home": "",
+      "testo": "<h2>“Solitude”</h2><p>di DANILO MEMOLI</p><p>Il disco, un piano solo eseguito dal virtuoso pianista Danilo Memoli sul pianoforte Bluthner degli anni Venti, è registrato in alta risoluzione e interamente dedicato a Duke Ellington e Billy Strayhorn. La registrazione e il mixaggio portano la firma del noto tecnico del suono Stefano Amerio e dello studio Artesuono (Udine), considerato fra i migliori tecnici in circolazione e vincitore di diversi premi internazionali.</p><p>A produrlo,  <strong>Unisono Records, </strong>etichetta indipendente specializzata nei “live recording” con studio di registrazione al secondo piano di Palazzo Guarnieri a Feltre, con 2 sale di ripresa: la Classic Hall e la Modern Hall</p><p>Per informazioni e iscrizioni :</p><p>388 7884850</p><p><a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a></p><p>www.unisonofactory.com</p>"
+    }
+  ]
+}

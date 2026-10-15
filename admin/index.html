@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pannello – UNISONO Factory</title>
+  <link rel="icon" type="image/png" href="/assets/img/logo_navbar.png">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <!-- Accesso -->
+  <section id="login" class="login" hidden>
+    <form class="login-box" id="login-form">
+      <img src="/assets/img/Unisono-Factory-bianco.png" alt="UNISONO Factory" class="login-logo">
+      <h1>Area riservata</h1>
+      <label>Nome utente<input name="username" autocomplete="username" required autofocus></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="login-error" id="login-error" role="alert"></p>
+      <button class="btn btn-primary btn-block" type="submit">Entra</button>
+    </form>
+  </section>
+
+  <!-- Pannello -->
+  <div id="app" class="app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="/assets/img/Unisono-Factory-bianco.png" alt="UNISONO Factory">
+        <span>Pannello</span>
+      </div>
+      <nav id="nav" class="nav"></nav>
+      <div class="sidebar-foot">
+        <a href="/" target="_blank" rel="noopener">Apri il sito ↗</a>
+        <div class="me"><span id="me"></span> · <button type="button" class="link" id="logout">Esci</button></div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <button type="button" class="btn btn-ghost menu-btn" id="menu-btn" aria-label="Menu">☰</button>
+        <h1 id="page-title"></h1>
+        <div class="topbar-actions">
+          <div class="device" role="group" aria-label="Dimensione anteprima">
+            <button type="button" data-device="desktop" class="active" title="Anteprima computer">Computer</button>
+            <button type="button" data-device="mobile" title="Anteprima telefono">Telefono</button>
+          </div>
+          <button type="button" class="btn btn-ghost preview-toggle" id="preview-toggle">Anteprima</button>
+        </div>
+      </header>
+
+      <div class="split">
+        <section class="editor" id="editor"></section>
+        <section class="preview" id="preview-pane">
+          <div class="preview-frame-wrap"><iframe id="preview" title="Anteprima della pagina"></iframe></div>
+        </section>
+      </div>
+
+      <footer class="savebar" id="savebar">
+        <span class="status" id="status">Nessuna modifica</span>
+        <div class="savebar-actions">
+          <button type="button" class="btn btn-ghost" id="discard" disabled>Annulla modifiche</button>
+          <button type="button" class="btn btn-primary" id="publish" disabled>Pubblica</button>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <dialog id="dialog" class="dialog"></dialog>
+  <input type="file" id="file-input" hidden>
+
+  <script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

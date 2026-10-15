@@ -786,6 +786,8 @@ main { padding-top: var(--header-h); }
 .corsi li { padding-left: 16px; position: relative; }
 .corsi li::before { content: "•"; position: absolute; left: 0; }
 .corsi h3.plain { font-family: var(--font-base); font-weight: 600; }
+.workshop { margin-top: 36px; }
+.workshop h3 + p { padding-left: 20px; }
 
 .related { --overlay: rgba(151, 25, 26, .78); padding: 50px 0; }
 .related .tiles {
