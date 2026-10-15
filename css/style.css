@@ -1,0 +1,967 @@
+/* =========================================================
+   UNISONO Factory — foglio di stile principale
+   Colori e font ripresi dal sito originale (WordPress/Uncode)
+   ========================================================= */
+
+:root {
+  --nero: #141618;
+  --testo: #1b1d1f;
+  --titoli: #303133;
+  --grigio-chiaro: #f7f7f7;
+  --grigio: #eaeaea;
+  --bianco: #ffffff;
+  --rosso: #ff0000;
+  --rosso-scuro: #97191a;
+  --blu: #003fff;
+  --blu-pdf: #006cff;
+  --navy: #212f60;
+
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --font-display: "Abril Fatface", Georgia, serif;
+  --font-lato: "Lato", var(--font-base);
+
+  --larghezza: 1140px;
+  --header-h: 80px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--testo);
+  background: var(--bianco);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+h1, h2, h3, h4 {
+  margin: 0 0 .6em;
+  color: var(--titoli);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h2 { font-size: 29px; }
+h3 { font-size: 24px; }
+
+p { margin: 0 0 1.2em; }
+
+.container {
+  width: 100%;
+  max-width: var(--larghezza);
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.center { text-align: center; }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.dark,
+.dark h1,
+.dark h2,
+.dark h3 { color: var(--bianco); }
+
+section { position: relative; }
+
+.section { padding: 72px 0; }
+.section-sm { padding: 36px 0; }
+
+.bg-grigio-chiaro { background: var(--grigio-chiaro); }
+.bg-grigio { background: var(--grigio); }
+.bg-rosso-scuro { background: var(--rosso-scuro); }
+.bg-navy { background: var(--navy); }
+
+/* Sfondo fotografico con velatura */
+.bg-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay, rgba(0, 0, 0, .55));
+  pointer-events: none;
+}
+
+.bg-photo > * { position: relative; z-index: 1; }
+
+/* Righe divisorie */
+.divider {
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .25);
+  margin: 28px 0;
+}
+
+.divider-short {
+  width: 25%;
+  margin: 28px auto;
+  border-top: 1px solid rgba(0, 0, 0, .12);
+}
+
+.divider-red { border-top: 2px solid var(--rosso); }
+.divider-blue { border-top: 2px solid var(--blu); }
+
+/* =========================================================
+   Pulsanti
+   ========================================================= */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  font-family: var(--font-base);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bianco);
+  background: var(--titoli);
+  border: 1px solid transparent;
+  transition: opacity .2s, background .2s, color .2s;
+  cursor: pointer;
+}
+
+.btn:hover { opacity: .85; }
+
+.btn-xl { padding: 18px 46px; font-size: 18px; }
+.btn-lg { padding: 15px 36px; font-size: 15px; }
+.btn-rosso { background: var(--rosso); }
+.btn-blu { background: var(--blu); }
+.btn-pdf { background: var(--blu-pdf); }
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .8);
+}
+
+.btn-outline:hover { background: var(--bianco); color: var(--titoli); opacity: 1; }
+
+/* =========================================================
+   Header e menu
+   ========================================================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: var(--nero);
+  transition: background .3s, height .3s;
+}
+
+.site-header.transparent { background: transparent; }
+.site-header.transparent.scrolled,
+.site-header.menu-open { background: var(--nero); }
+
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+
+.logo img { height: 52px; width: auto; }
+
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.main-nav li { position: relative; }
+
+.main-nav a {
+  display: block;
+  padding: 10px 14px;
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--bianco);
+  transition: color .2s;
+}
+
+.main-nav a:hover,
+.main-nav a.active { color: rgba(255, 255, 255, .5); }
+
+.has-sub > a::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 0 3px 8px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 230px;
+  padding: 10px 0 !important;
+  background: var(--nero);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .2s, transform .2s, visibility .2s;
+}
+
+.has-sub:hover .sub-menu,
+.has-sub:focus-within .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.sub-menu a { padding: 8px 22px; }
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--bianco);
+  position: relative;
+  transition: transform .25s, background .25s;
+}
+
+.menu-toggle span::before,
+.menu-toggle span::after { content: ""; position: absolute; left: 0; }
+.menu-toggle span::before { top: -7px; }
+.menu-toggle span::after { top: 7px; }
+
+.menu-open .menu-toggle span { background: transparent; }
+.menu-open .menu-toggle span::before { transform: translateY(7px) rotate(45deg); }
+.menu-open .menu-toggle span::after { transform: translateY(-7px) rotate(-45deg); }
+
+main { padding-top: var(--header-h); }
+.home main { padding-top: 0; }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--nero);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  animation: kenburns 20s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+.hero-logo {
+  position: relative;
+  width: 640px;
+  max-width: 80%;
+  animation: fadein 1.2s ease .3s both;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+.page-hero {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(42px, 6vw, 80px);
+  line-height: 1.05;
+  color: var(--bianco);
+  margin: 0;
+}
+
+/* =========================================================
+   Griglie e card (eventi, novità)
+   ========================================================= */
+
+.cards-box {
+  background: var(--bianco);
+  padding: 18px 0 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.card { display: flex; flex-direction: column; align-items: flex-start; }
+
+.card-media { display: block; width: 100%; margin-bottom: 18px; }
+.card-media img { width: 100%; transition: opacity .3s; }
+.card-media:hover img { opacity: .85; }
+
+.card h3 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.card h3 a { text-decoration: none; }
+
+.info-line {
+  margin: 48px 0 0;
+  text-align: center;
+}
+
+.info-line em { font-weight: 600; }
+
+.novita-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.novita-logo { display: flex; justify-content: center; align-items: center; height: 100%; }
+.novita-logo img { width: 300px; }
+
+/* Masterclass */
+.masterclass-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  text-align: center;
+}
+
+.masterclass-grid img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; margin-bottom: 36px; }
+.masterclass-grid p { margin-bottom: 1em; }
+.masterclass-grid strong { color: var(--titoli); }
+
+.download-info {
+  font-size: 29px;
+  margin: 0;
+}
+
+.download-info a { text-decoration: none; }
+.download-info a:hover { color: var(--rosso); }
+
+/* =========================================================
+   Sezioni a due colonne
+   ========================================================= */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.split.top { align-items: start; }
+
+.split-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+.split-full > .col-img {
+  background-size: cover;
+  background-position: center;
+  min-height: 360px;
+}
+
+.split-full > .col-text {
+  padding: 72px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.big-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 65px);
+  line-height: 1.2;
+  margin: 0 0 .4em;
+}
+
+.mid-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.2;
+}
+
+/* Home: mondo di musica */
+.mondo { --overlay: rgba(0, 0, 0, .55); padding: 140px 0; }
+.mondo img { width: 230px; margin: 0 auto 28px; }
+.mondo h3 { font-size: 24px; }
+.mondo p strong { font-family: var(--font-lato); }
+
+/* Home: Jazz Cafè */
+.jazz { --overlay: linear-gradient(90deg, rgba(97, 8, 10, .75), rgba(60, 0, 5, .55)); padding: 90px 0; }
+.jazz-left { text-align: center; }
+.jazz-left img { width: 200px; margin: 0 auto 30px; }
+.jazz-left .big-title { color: var(--bianco); }
+.jazz-left .divider { max-width: 280px; margin: 32px auto; }
+
+/* Home: Centro di Musica */
+.centro { --overlay: rgba(4, 12, 40, .78); padding: 72px 0 40px; }
+.centro-logo { width: 200px; margin: 0 auto; }
+.centro .divider { max-width: 400px; margin: 32px auto; }
+.centro-text { max-width: 620px; margin: 0 auto; text-align: center; }
+.note {
+  font-family: var(--font-lato);
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+  margin: 36px 0 0;
+}
+
+/* Carosello schede (Scuola & Corsi, Music Ambassador Award) */
+.carousel {
+  position: relative;
+  margin-top: 40px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.tile {
+  flex: 0 0 25%;
+  scroll-snap-align: start;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 10, 60, .45);
+  transition: background .3s;
+}
+
+.tile.plain::before { background: transparent; }
+.tile:hover::before { background: rgba(0, 0, 0, .25); }
+
+.tile h3 {
+  position: relative;
+  margin: 0;
+  padding: 0 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--bianco);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 64px;
+  border: 0;
+  color: var(--bianco);
+  background: rgba(0, 0, 0, .45);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+
+/* Home: Studios */
+.studios { --overlay: rgba(40, 10, 10, .55); padding: 100px 0; }
+.studios .center .big-title { color: var(--bianco); }
+.studios .divider { max-width: 280px; margin: 32px auto; }
+
+/* Home: Family */
+.family .big-title { color: var(--titoli); }
+.family .divider { margin: 24px 0 36px; }
+.family img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+
+/* Home: Palazzo Guarnieri */
+.palazzo { --overlay: rgba(30, 30, 30, .55); }
+.palazzo-box {
+  max-width: 290px;
+  margin: 0 auto;
+  padding: 50px 50px 30px;
+  min-height: 560px;
+  background: rgba(110, 50, 55, .65);
+  text-align: center;
+  font-size: 14px;
+}
+
+.palazzo-box h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.15;
+  color: var(--bianco);
+}
+
+.palazzo-box h2 small { display: block; font-size: 36px; }
+
+/* Home: Photogallery */
+.gallery { --overlay: rgba(10, 10, 30, .5); padding: 70px 0; }
+
+.collage {
+  position: relative;
+  height: 400px;
+  max-width: 420px;
+}
+
+.collage img {
+  position: absolute;
+  object-fit: cover;
+  filter: grayscale(1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}
+
+.collage img:nth-child(1) { left: 0; top: 0; width: 63%; height: 64%; }
+.collage img:nth-child(2) { left: 27%; top: 14%; width: 63%; height: 63%; }
+.collage img:nth-child(3) { left: 10%; top: 35%; width: 63%; height: 64%; }
+
+.gallery h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 65px);
+  color: var(--rosso);
+  margin-bottom: .3em;
+}
+
+.gallery p { font-size: 18px; }
+
+/* Sponsor */
+.sponsor img { margin: 0 auto; }
+.sponsor-box { background: var(--bianco); padding: 20px; }
+.poc { display: block; max-width: 680px; margin: 36px auto 0; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.site-footer {
+  --overlay: rgba(20, 22, 30, .72);
+  padding: 72px 0 90px;
+  color: var(--bianco);
+  font-family: var(--font-lato);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 0.8fr;
+  gap: 36px;
+}
+
+.footer-grid h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--rosso);
+  margin-bottom: 22px;
+}
+
+.footer-grid p { margin: 0 0 1em; }
+
+.footer-grid a { text-decoration: none; }
+.footer-grid a:hover { text-decoration: underline; }
+
+.ico {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ico svg { width: 13px; height: 13px; fill: var(--rosso); flex: none; }
+
+.footer-logo { text-align: right; }
+.footer-logo img { width: 120px; margin-left: auto; }
+
+.social {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.social svg { width: 16px; height: 16px; fill: var(--bianco); }
+
+.to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 90;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 2px;
+  color: var(--bianco);
+  background: rgba(60, 60, 60, .8);
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+
+.to-top.visible { opacity: 1; visibility: visible; }
+
+/* =========================================================
+   Pagine interne
+   ========================================================= */
+
+/* Jazz Cafè */
+.jc-hero { --overlay: rgba(0, 0, 0, .15); min-height: 520px; display: flex; justify-content: center; }
+.jc-hero-box {
+  width: 33.333%;
+  background: rgba(200, 0, 0, .75);
+  padding: 50px 40px;
+  text-align: center;
+}
+.jc-hero-box h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 4.5vw, 60px);
+  color: var(--bianco);
+  margin: 0;
+}
+.jc-hero-box .divider { margin: 22px auto 0; max-width: 90%; }
+
+.jc-concerti .big-title { text-align: center; margin-bottom: 1em; }
+.jc-concerti .mid-title { margin-top: 40px; color: var(--titoli); }
+
+.slideshow {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  background: #000;
+}
+
+.slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slideshow img.active { opacity: 1; }
+
+.slide-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.slide-dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .5);
+  cursor: pointer;
+}
+
+.slide-dots button.active { background: var(--bianco); }
+
+.ristorante { display: grid; grid-template-columns: 1fr 1fr; }
+.ristorante .col-media { padding: 24px 5% 24px 5%; display: flex; align-items: flex-start; }
+.ristorante .col-media .slideshow { width: 100%; }
+.ristorante .col-text { padding: 72px 5% 72px 5%; }
+.ristorante h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(36px, 4vw, 50px); }
+
+/* Bande colorate con testo grande */
+.band {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.band h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.2;
+  color: var(--bianco);
+  margin: 0;
+}
+
+.band.small h2 { font-size: 29px; }
+.band p { color: var(--bianco); font-family: var(--font-lato); font-weight: 600; font-size: 18px; margin: 24px 0 0; }
+
+/* Scuola */
+.scuola-hero { background: #e9e9e9; min-height: 340px; }
+.scuola-hero h1 { color: var(--bianco); text-shadow: 0 2px 18px rgba(0, 0, 0, .15); }
+
+.corsi .display { font-size: 24px; color: var(--titoli); }
+.corsi ul { list-style: none; padding: 0; margin: 0 0 1.2em; }
+.corsi li { padding-left: 16px; position: relative; }
+.corsi li::before { content: "•"; position: absolute; left: 0; }
+.corsi h3.plain { font-family: var(--font-base); font-weight: 600; }
+
+.related { --overlay: rgba(151, 25, 26, .78); padding: 50px 0; }
+.related .tiles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.related .tile { flex: 0 0 300px; }
+
+.scrivici {
+  padding: 60px 0 30px;
+  text-align: center;
+}
+
+.scrivici h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 70px);
+  line-height: 1.1;
+  color: var(--rosso);
+  margin: 0;
+}
+
+.contatto { --overlay: rgba(255, 255, 255, .9); padding: 60px 0 80px; }
+.contatto .container { max-width: 760px; }
+.contatto h3 { font-family: var(--font-display); font-weight: 400; }
+
+.form-field { margin-bottom: 18px; }
+.form-field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  border: 1px solid #ccc;
+  background: var(--bianco);
+}
+.form-field textarea { min-height: 140px; resize: vertical; }
+.form-privacy { font-size: 12px; line-height: 1.6; color: #555; }
+
+/* Studios */
+.studios-hero { --overlay: rgba(0, 0, 0, .35); min-height: 560px; }
+.studios-hero .hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.studios-hero img { width: 110px; }
+.studios-hero h1 {
+  font-family: var(--font-base);
+  font-weight: 600;
+  font-size: clamp(44px, 7.5vw, 106px);
+}
+
+.studio-gallery { --overlay: rgba(255, 255, 255, .85); padding: 24px 0; }
+.studio-gallery .slideshow { max-width: 900px; margin: 0 auto; }
+
+.hall { padding: 40px 0; }
+.hall h2 { font-size: 29px; }
+.hall-media { --overlay: rgba(0, 0, 0, .1); padding: 40px; }
+.hall-media .slideshow { max-width: 360px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
+
+.servizi { max-width: 860px; margin: 0 auto; text-align: center; }
+
+/* Music Ambassador Award */
+.maa-hero { --overlay: rgba(0, 0, 0, .3); min-height: 430px; }
+.maa-hero h1 { text-transform: uppercase; }
+
+.maa-visione .col-text { background: var(--grigio-chiaro); }
+.maa-visione .big-title { color: var(--titoli); text-transform: uppercase; font-size: clamp(32px, 3.6vw, 46px); }
+
+.maa-list { --overlay: rgba(0, 0, 0, .55); }
+.maa-list .palazzo-box { min-height: 0; padding-bottom: 50px; text-align: left; }
+.maa-list .palazzo-box h2 { text-align: center; font-size: 42px; }
+.maa-list ul { padding-left: 18px; margin: 0; }
+
+/* Pagine evento / novità */
+.evento .split { grid-template-columns: 5fr 6fr; gap: 48px; }
+.evento h2 { font-size: 29px; }
+.evento h3 { font-size: 24px; margin-bottom: .8em; }
+
+/* Accessibilità */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Comparsa al caricamento/scorrimento */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .hero-logo { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 959px) {
+  :root { --header-h: 64px; }
+
+  .header-inner { padding: 0 18px; }
+  .logo img { height: 40px; }
+
+  .menu-toggle { display: block; }
+
+  .main-nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--nero);
+    padding: 20px 18px;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .menu-open .main-nav { display: block; }
+
+  .main-nav > ul { flex-direction: column; align-items: stretch; }
+  .main-nav a { font-size: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255, 255, 255, .08); }
+
+  .sub-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 0 0 0 16px !important;
+    min-width: 0;
+  }
+
+  .cards { grid-template-columns: 1fr 1fr; }
+  .novita-grid { grid-template-columns: 1fr 1fr; }
+  .novita-logo { grid-column: 1 / -1; }
+  .tile { flex-basis: 50%; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-logo { text-align: left; }
+  .footer-logo img { margin-left: 0; }
+  .social { justify-content: flex-start; }
+  .jc-hero-box { width: 70%; }
+}
+
+@media (max-width: 719px) {
+  .container { padding: 0 16px; }
+  .section { padding: 54px 0; }
+
+  .cards,
+  .novita-grid,
+  .masterclass-grid,
+  .split,
+  .split-full,
+  .ristorante,
+  .evento .split,
+  .footer-grid { grid-template-columns: 1fr; }
+
+  .split-full > .col-text,
+  .ristorante .col-text { padding: 54px 16px; }
+
+  .tile { flex-basis: 80%; }
+
+  .collage { height: 300px; margin: 0 auto 30px; }
+  .jc-hero-box { width: 100%; }
+  .palazzo-box { max-width: 100%; min-height: 0; padding: 40px 24px; }
+  .studios-hero .hero-title { gap: 20px; }
+  .studios-hero img { width: 70px; }
+  .hall-media { padding: 16px; }
+}
