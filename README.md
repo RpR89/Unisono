@@ -49,9 +49,14 @@ e poi apri http://localhost:8000
 
 ## Pubblicazione
 
-Il sito è fatto di file statici, quindi si può pubblicare su qualsiasi hosting:
-- **Aruba**: carica tutto il contenuto della cartella via FTP nella cartella principale del dominio;
-- in alternativa Vercel, Netlify o GitHub Pages, senza nessuna configurazione.
+Il sito è online su **https://unisono-azure.vercel.app**.
+
+È pubblicato da Vercel: a ogni modifica sul ramo `main` si aggiorna da solo,
+e per ogni pull request Vercel crea un'anteprima da provare prima di unirla.
+Non serve nessuna build: Vercel pubblica i file così come sono.
+
+Il dominio `unisonofactory.com` punta ancora al sito WordPress su Aruba.
+Per spostarlo su Vercel: progetto su Vercel → *Settings → Domains*, poi si aggiornano i DNS su Aruba.
 
 ## Differenze rispetto al sito WordPress
 
