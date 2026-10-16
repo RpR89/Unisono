@@ -1,18 +1,24 @@
 {
   "generale": {
-    "descrizione": "UNISONO Factory - Palazzo Guarnieri, Feltre: Jazz Cafè, Centro di Musica, Unisono Studios.",
+    "descrizione": "Jazz Cafè con concerti dal vivo, Centro di Musica con corsi e masterclass e Unisono Studios a Palazzo Guarnieri, nel centro storico di Feltre.",
     "logo_header": "assets/img/Unisono-Factory-bianco.png",
     "logo_footer": "assets/img/logo_navbar.png",
     "sfondo_footer": "assets/img/5.jpg",
     "privacy_url": "",
-    "cookie_url": ""
+    "cookie_url": "",
+    "url_sito": "https://unisono-azure.vercel.app",
+    "titolo_home": "UNISONO Factory – Jazz Cafè, Centro di Musica e Studios a Feltre",
+    "pulsante_prenota": "Prenota",
+    "messaggio_whatsapp": "Ciao, vorrei prenotare per "
   },
   "contatti": {
     "telefono": "388 7884850",
     "email": "info@unisonojazz.it",
     "email_privacy": "privacy@unisonofactory.com",
     "facebook": "https://www.facebook.com/unisonojazzcafe",
-    "instagram": "https://www.instagram.com/unisonojazzcafe/"
+    "instagram": "https://www.instagram.com/unisonojazzcafe/",
+    "whatsapp": "388 7884850",
+    "orari": ""
   },
   "azienda": {
     "nome": "UNISONO S.R.L.",
@@ -22,23 +28,29 @@
   "modulo": {
     "titolo": "Per info e domande...\nscrivici!",
     "sottotitolo": "Modulo di contatto",
-    "testo": "<p>Per qualsiasi necessità, informazioni e domande non esitare a contrattarci. Oltre a email e telefono, puoi anche compilare questo modulo.<br>Ti risponderemo al più presto!</p>",
+    "testo": "<p>Per qualsiasi necessità, informazioni e domande non esitare a contattarci. Oltre a email e telefono, puoi anche compilare questo modulo.<br>Ti risponderemo al più presto!</p>",
     "email_destinatario": "info@unisonojazz.it",
     "sfondo": "assets/img/1.jpg"
   },
   "home": {
     "hero": {
       "sfondo": "assets/img/4_sfumata.jpg",
-      "logo": "assets/img/unisono_solo.png"
+      "logo": "assets/img/unisono_solo.png",
+      "frase": "Jazz club, scuola di musica e studio di registrazione\nnel cuore di Palazzo Guarnieri, a Feltre",
+      "pulsante_eventi": "Prossimi eventi",
+      "pulsante_prenota": "Prenota"
     },
     "eventi": {
       "titolo": "I PROSSIMI EVENTI",
-      "info": "PER INFO E PRENOTAZIONI:"
+      "info": "PER INFO E PRENOTAZIONI:",
+      "pulsante": "Scopri e prenota",
+      "vuoto": "Nuove date in arrivo. Seguici su Instagram o scrivici su WhatsApp per sapere i prossimi concerti."
     },
     "novita": {
       "titolo": "NOVITA'",
       "logo": "assets/img/UNISONO_RECORDS_26.png",
-      "info": "PER INFO E ACQUISTI:"
+      "info": "PER INFO E ACQUISTI:",
+      "pulsante": "Scopri di più"
     },
     "masterclass": {
       "titolo": "MASTERCLASS",
@@ -47,13 +59,15 @@
           "immagine": "assets/img/Massimiliano-ferrati-quadrata.png",
           "testo": "<p><strong>MASTERCLASS PER PIANOFORTE E MUSICA DA CAMERA</strong><br>MASSIMILIANO FERRATI</p><p>Repertorio solistico e musica da camera<br>Feltre (BL) 30 Agosto, 1 – 2  – 3 Settembre 2026</p>",
           "pdf": "assets/pdf/masterclass-pianoforte-massimiliano-ferrati-2026.pdf",
-          "pulsante": "DOWNLOAD INFO"
+          "pulsante": "DOWNLOAD INFO",
+          "data_fine": "2026-09-03"
         },
         {
           "immagine": "assets/img/masterclass-quadrata.png",
-          "testo": "<p><strong>MASTERCLASS DI VIOLONCELLO E MUSICA DA CAMERA</strong><br><em>PAOLO ANDRIOTTI</em></p><p>Repertorio Solistico, Cameristico e Ochestrale<br>Feltre (BL) 30 Agosto, 1 – 2  – 3 Settembre 2026</p>",
+          "testo": "<p><strong>MASTERCLASS DI VIOLONCELLO E MUSICA DA CAMERA</strong><br><em>PAOLO ANDRIOTTI</em></p><p>Repertorio Solistico, Cameristico e Orchestrale<br>Feltre (BL) 30 Agosto, 1 – 2  – 3 Settembre 2026</p>",
           "pdf": "assets/pdf/masterclass-violoncello-paolo-andriotti-2026.pdf",
-          "pulsante": "DOWNLOAD INFO"
+          "pulsante": "DOWNLOAD INFO",
+          "data_fine": "2026-09-03"
         }
       ]
     },
@@ -61,19 +75,19 @@
       "sfondo": "assets/img/8_mod_2.jpg",
       "logo": "assets/img/Unisono-Factory-bianco.png",
       "titolo": "un mondo di musica…",
-      "testo": "<p>A <strong>Palazzo Guarnieri</strong> trovi un mondo di musica: Il <strong>Jazz Cafè</strong> con bar, cucina e musica dal vivo, il <strong>Centro di di Musica</strong> con corsi di musica e masterclass tutto l’anno , due sale concerti ( <strong>Classic Hall</strong> e <strong>Modern Hall</strong>) per assistere a grandi eventi di musica classica, jazz e pop e <strong>Studio Recording</strong> per le produzioni dal vivo.</p>"
+      "testo": "<p>A <strong>Palazzo Guarnieri</strong> trovi un mondo di musica: Il <strong>Jazz Cafè</strong> con bar, cucina e musica dal vivo, il <strong>Centro di Musica</strong> con corsi di musica e masterclass tutto l’anno, due sale concerti (<strong>Classic Hall</strong> e <strong>Modern Hall</strong>) per assistere a grandi eventi di musica classica, jazz e pop e <strong>Studio Recording</strong> per le produzioni dal vivo.</p>"
     },
     "jazz": {
       "sfondo": "assets/img/8.jpg",
       "logo": "assets/img/semitrasparente.png",
       "titolo": "Unico\nintimo\naccogliente",
       "pulsante": "Entra nel Jazz Cafè",
-      "testo": "<p>Al piano terra di Palazzo Guarnieri si trova il <b>Jazz Cafè</b>; qui hanno suonato in 28 anni di attività alcuni fra i migliori jazzisti italiani (Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pierannunzi, ecc. ) e musicisti americani (Kurt Rosenwinkel, Ethan Iverson, Bill Stewart, Jerry Bergonzi, ecc)</p><p>Centinaia e centinaia di concerti, suoni, emozioni e tanta passione hanno da sempre animato la vita e la storia del Jazz Cafè facendolo conoscere in tutta Italia e all’estero.</p>"
+      "testo": "<p>Al piano terra di Palazzo Guarnieri si trova il <b>Jazz Cafè</b>; qui hanno suonato in 28 anni di attività alcuni fra i migliori jazzisti italiani (Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pieranunzi, ecc.) e musicisti americani (Kurt Rosenwinkel, Ethan Iverson, Bill Stewart, Jerry Bergonzi, ecc)</p><p>Centinaia e centinaia di concerti, suoni, emozioni e tanta passione hanno da sempre animato la vita e la storia del Jazz Cafè facendolo conoscere in tutta Italia e all’estero.</p>"
     },
     "centro": {
       "sfondo": "assets/img/eleonora_centa-18-scaled.jpg",
       "logo": "assets/img/vettoriale.png",
-      "testo": "<p>I<b>l Centro di Musica </b>svolge un’attività didattica tutto l’anno; da ottobre a maggio ci sono i corsi amatoriali per ragazzi e per tutti gli strumenti oltre alla musica d’insieme mentre nel periodo estivo si tengono le masterclass di perfezionamento in ambito classico, jazz e canto lirico.</p><p>Il Centro è attivo dal 2001 e ad oggi centinaia e centinaia di giovani musicisti hanno frequentato i nostri corsi.</p><p>Il Centro è convenzionato con Il Conservatorio di Musica Arrigo Pedrollo di Vicenza</p>",
+      "testo": "<p><b>Il Centro di Musica</b> svolge un’attività didattica tutto l’anno; da ottobre a maggio ci sono i corsi amatoriali per ragazzi e per tutti gli strumenti oltre alla musica d’insieme mentre nel periodo estivo si tengono le masterclass di perfezionamento in ambito classico, jazz e canto lirico.</p><p>Il Centro è attivo dal 2001 e ad oggi centinaia e centinaia di giovani musicisti hanno frequentato i nostri corsi.</p><p>Il Centro è convenzionato con Il Conservatorio di Musica Arrigo Pedrollo di Vicenza</p>",
       "schede": [
         {
           "titolo": "Music Ambassador Award",
@@ -92,11 +106,11 @@
       "sfondo": "assets/img/DSCF1624.jpg",
       "titolo": "Unisono\nStudios",
       "pulsante": "Scopri di piu'",
-      "testo": "<p>Due sale di ripresa,<strong> la Classic Hall e la Modern Hall</strong> per la produzione dei grandi eventi dal vivo; un sistema di ripresa video in multicamera firmato <strong>Black Magic Design</strong>, la possibilità di risiedere per tutta la durata della produzione in una dimora storica e di vivere l’atmosfera e la storia di un antico borgo rinascimentale, una backline di prima scelta sempre a disposizione degli artisti, uno staff di tecnici molto preparati con i quali lavorare, la possibilità di utilizzare un servizio professionale di ufficio stampa e comunicazione per gli show case e le presentazioni alle riviste di settore e network specializzati dei prodotti realizzati…</p>"
+      "testo": "<p>Due sale di ripresa, <strong>la Classic Hall e la Modern Hall</strong> per la produzione dei grandi eventi dal vivo; un sistema di ripresa video in multicamera firmato <strong>Black Magic Design</strong>, la possibilità di risiedere per tutta la durata della produzione in una dimora storica e di vivere l’atmosfera e la storia di un antico borgo rinascimentale, una backline di prima scelta sempre a disposizione degli artisti, uno staff di tecnici molto preparati con i quali lavorare, la possibilità di utilizzare un servizio professionale di ufficio stampa e comunicazione per gli show case e le presentazioni alle riviste di settore e network specializzati dei prodotti realizzati…</p>"
     },
     "family": {
       "titolo": "Unisono\nFamily",
-      "testo": "<p>Qui troverai la <strong>nostra Famiglia</strong>, il rooster degli artisti che collaborano con noi.</p>",
+      "testo": "<p>Qui troverai la <strong>nostra Famiglia</strong>, il roster degli artisti che collaborano con noi.</p>",
       "pulsante": "Scopri di piu'",
       "pdf": "assets/pdf/Unisono-Family-new.pdf",
       "immagine": "assets/img/Luppi_ridotto-4764-scaled.jpg"
@@ -117,12 +131,22 @@
       "titolo": "PHOTOGALLERY",
       "testo": "<p>(IN ALLESTIMENTO) Galleria di foto e video degli artisti che negli anni si sono esibiti all'Unisono Jazz Club</p>",
       "pulsante": "In allestimento",
-      "link": ""
+      "link": "",
+      "visibile": false
     },
     "sponsor": {
       "immagine": "assets/img/sponsor-1.png",
       "banner": "assets/img/Banner-Progetto-Finanziato-POC-scaled.jpg",
       "link": "https://www.veneto-rivers-holiday.com/it/veneto-rivers-experience"
+    },
+    "dove": {
+      "visibile": true,
+      "titolo": "Dove\nsiamo",
+      "testo": "<p>Ci trovi a <strong>Palazzo Guarnieri</strong>, nel centro storico di Feltre, a due passi da Piazza Maggiore.</p>",
+      "indirizzo": "Palazzo Guarnieri\nPiazza Vittorio Emanuele, 4 – 32032 Feltre (BL)",
+      "mappa": "https://www.google.com/maps/search/?api=1&query=Palazzo+Guarnieri+Feltre",
+      "pulsante_mappa": "Apri in Google Maps",
+      "immagine": "assets/img/Esterno-Palazzo-Guarnieri.jpg"
     }
   },
   "jazzcafe": {
@@ -132,9 +156,9 @@
     },
     "concerti": {
       "titolo": "I CONCERTI",
-      "testo": "<p>Nel nostro<strong> Jazz Cafè</strong> si sono esibiti, nel corso di 27 anni di attività concertistica (con oltre 400 concerti dal vivo), alcuni fra i migliori jazzisti in circolazione.<br>Fra gli italiani citiamo Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pierannzi, Dado Moroni, Antonello Salis, Sandro Gibellini, ecc<br>Attraversando il pacifico, invece, direttamente dagli States sono arrivati musicisti del calibro di Kurt Rosenwinkel, Vincent Herring, Ethan Iverson, Mark Turner, Jeff Ballard, Bill Stewart, Jerry Bergonzi ecc</p><p>Suoni, emozioni e passione: sono parti di un grande motore che fin dal primo giorno sprigiona quella energia così speciale che avvolge il Jazz Cafè<br>Qui all’Unisono Jazz Cafè si può godere di un’ottima acustica e di un rapporto di stretta vicinanza con il palco dei musicisti;  gli ospiti del Club, quasi potendo “toccare con mano” gli artisti, si lasciano andare ad un’esperienza musicale davvero immersiva.<br>Molto coinvolgente è anche il momento del “post concerto” , con la possibilità di fare due chiacchiere e bere un buon bicchiere di vino in compagnia di grandi musicisti e delle loro storie di vita, spesso molto affascinanti</p><p>La stagione concertistica va <strong>da ottobre a maggio.</strong></p><p>Ogni concerto prevede 2 set:<br>• Primo set alle 19.30<br>• Secondo set alle 21.30</p><p><strong>Nel periodo estivo apre i battenti il giardino esterno di Palazzo Guarnirei, un “terrazzo musicale” con dj set e serate a tema.</strong></p>",
+      "testo": "<p>Nel nostro <strong>Jazz Cafè</strong> si sono esibiti, nel corso di 27 anni di attività concertistica (con oltre 400 concerti dal vivo), alcuni fra i migliori jazzisti in circolazione.<br>Fra gli italiani citiamo Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pieranunzi, Dado Moroni, Antonello Salis, Sandro Gibellini, ecc<br>Attraversando il pacifico, invece, direttamente dagli States sono arrivati musicisti del calibro di Kurt Rosenwinkel, Vincent Herring, Ethan Iverson, Mark Turner, Jeff Ballard, Bill Stewart, Jerry Bergonzi ecc</p><p>Suoni, emozioni e passione: sono parti di un grande motore che fin dal primo giorno sprigiona quella energia così speciale che avvolge il Jazz Cafè<br>Qui all’Unisono Jazz Cafè si può godere di un’ottima acustica e di un rapporto di stretta vicinanza con il palco dei musicisti;  gli ospiti del Club, quasi potendo “toccare con mano” gli artisti, si lasciano andare ad un’esperienza musicale davvero immersiva.<br>Molto coinvolgente è anche il momento del “post concerto”, con la possibilità di fare due chiacchiere e bere un buon bicchiere di vino in compagnia di grandi musicisti e delle loro storie di vita, spesso molto affascinanti</p><p>La stagione concertistica va <strong>da ottobre a maggio.</strong></p><p>Ogni concerto prevede 2 set:<br>• Primo set alle 19.30<br>• Secondo set alle 21.30</p><p><strong>Nel periodo estivo apre i battenti il giardino esterno di Palazzo Guarnieri, un “terrazzo musicale” con dj set e serate a tema.</strong></p>",
       "immagine": "assets/img/M66A3006-scaled.jpg",
-      "frase": "Centinaia di concerti con i pezzi \"grossi\" della musica\" di tutto il mondo."
+      "frase": "Centinaia di concerti con i pezzi “grossi” della musica di tutto il mondo."
     },
     "ristorante": {
       "foto": [
@@ -150,7 +174,8 @@
   },
   "scuola": {
     "hero": {
-      "titolo": "SCUOLA & CORSI"
+      "titolo": "SCUOLA & CORSI",
+      "sfondo": "assets/img/1.jpg"
     },
     "intro": {
       "titolo": "Dal 2001 formiamo centinaia di\ngiovani musicisti.",
@@ -159,14 +184,14 @@
     "centro": {
       "immagine": "assets/img/SIR_9195-scaled.jpg",
       "titolo": "IL CENTRO DI MUSICA",
-      "testo": "<p><strong>La Scuola di Musica del Centro di Musica</strong> Unisono è attiva tutto l’anno con corsi di strumento, corsi collettivi, masterclass, saggi e concerti ed è convenzionata con il Conservatorio Arrigo Pedrollo di Vicenza.</p><p>La Segreteria si trova al piano terra così come l’Aula di Percussioni, insonorizzata e dotata di impianto voci, amplificatori per chitarra e basso, batterie e percussioni ed è a disposizione per gli allievi che vogliano esercitarsi o suonare assieme.</p><p>Al piano secondo di Palazzo Guarnieri, in circa 400 metri quadrati fra soffitti affrescati, arredi e mobili d’epoca, troviamo le altre aule di strumento; gli allievi hanno a disposizione sia pianoforti moderni <strong>(Yamaha)</strong> e sia antichi <strong>( Bluthner)</strong> per esercitarsi e provare il repertorio. Possono inoltre usufruire dello Studio di Registrazione per incidere da soli o in gruppo a tariffe speciali.</p><p>Oltre ai corsi di strumento e alla musica d’insieme, sono attivi corsi base di tecnico del suono e di operatore video potendo utilizzare attrezzature professionali<strong> (Allen &amp; Heath, JBL, Black Magic Design, ecc)</strong> sotto la guida di professionisti esperti.</p><p>La Scuola di Musica ha come obiettivo quello di dare una visione il più possibile completa del mondo della musica: non solo lo studio di uno strumento ma anche e soprattutto offrire l’esperienza di suonare assieme ad altri allievi in un palco vero e con il pubblico. E ancora la possibilità di formarsi come tecnico del suono, come operatore video, come arrangiatore o produttore musicale. Ecco che la Scuola mette a disposizione Borse di Studio e Premi per gli allievi che hanno voglia di mettersi in gioco e avvicinarsi al mondo della musica professionale.</p>"
+      "testo": "<p><strong>La Scuola di Musica del Centro di Musica</strong> Unisono è attiva tutto l’anno con corsi di strumento, corsi collettivi, masterclass, saggi e concerti ed è convenzionata con il Conservatorio Arrigo Pedrollo di Vicenza.</p><p>La Segreteria si trova al piano terra così come l’Aula di Percussioni, insonorizzata e dotata di impianto voci, amplificatori per chitarra e basso, batterie e percussioni ed è a disposizione per gli allievi che vogliano esercitarsi o suonare assieme.</p><p>Al piano secondo di Palazzo Guarnieri, in circa 400 metri quadrati fra soffitti affrescati, arredi e mobili d’epoca, troviamo le altre aule di strumento; gli allievi hanno a disposizione sia pianoforti moderni <strong>(Yamaha)</strong> e sia antichi <strong>(Bluthner)</strong> per esercitarsi e provare il repertorio. Possono inoltre usufruire dello Studio di Registrazione per incidere da soli o in gruppo a tariffe speciali.</p><p>Oltre ai corsi di strumento e alla musica d’insieme, sono attivi corsi base di tecnico del suono e di operatore video potendo utilizzare attrezzature professionali <strong>(Allen &amp; Heath, JBL, Black Magic Design, ecc.)</strong> sotto la guida di professionisti esperti.</p><p>La Scuola di Musica ha come obiettivo quello di dare una visione il più possibile completa del mondo della musica: non solo lo studio di uno strumento ma anche e soprattutto offrire l’esperienza di suonare assieme ad altri allievi in un palco vero e con il pubblico. E ancora la possibilità di formarsi come tecnico del suono, come operatore video, come arrangiatore o produttore musicale. Ecco che la Scuola mette a disposizione Borse di Studio e Premi per gli allievi che hanno voglia di mettersi in gioco e avvicinarsi al mondo della musica professionale.</p>"
     },
     "banda": {
       "testo": "Il CENTRO DI MUSICA è il cuore didattico di UNISONO FACTORY."
     },
     "corsi": {
       "titolo": "I CORSI",
-      "testo": "<p><b>CORSI ANNUALI DI STRUMENTO</b></p><p>I corsi annuali sono previsti per tutti i livelli (dal base all’intermedio/avanzato) e per qualsiasi età e grado di preparazione. E’ prevista la possibilità di effettuare un mese di prova con tariffa agevolata; i corsi sono personalizzati in base al livello di preparazione e alle esigenze di ciascun allievo. I corsi vanno da ottobre a maggio ma ci si può iscrivere in qualsiasi momento dell’anno; sono previste Borse di Studio e Premi per gli allievi più meritevoli</p><p>I corsi di strumento oggi attivi sono:</p><ul><li>– Pianoforte classico e moderno</li><li>– Chitarra classica e moderna</li><li>– Canto jazz e moderno</li><li>– Flauto</li><li>– Sassofono</li><li>– Basso elettrico e contrabbasso</li><li>– Batteria</li></ul><p><b>Corsi collettivi:</b></p><ul><li>– Teoria e armonia</li><li>– Musica d’insieme</li></ul><p><b>Corsi speciali</b></p><ul><li>– Tecnico del suono</li><li>– Corso base di produzione video</li></ul>"
+      "testo": "<p><b>CORSI ANNUALI DI STRUMENTO</b></p><p>I corsi annuali sono previsti per tutti i livelli (dal base all’intermedio/avanzato) e per qualsiasi età e grado di preparazione. È prevista la possibilità di effettuare un mese di prova con tariffa agevolata; i corsi sono personalizzati in base al livello di preparazione e alle esigenze di ciascun allievo. I corsi vanno da ottobre a maggio ma ci si può iscrivere in qualsiasi momento dell’anno; sono previste Borse di Studio e Premi per gli allievi più meritevoli</p><p>I corsi di strumento oggi attivi sono:</p><ul><li>– Pianoforte classico e moderno</li><li>– Chitarra classica e moderna</li><li>– Canto jazz e moderno</li><li>– Flauto</li><li>– Sassofono</li><li>– Basso elettrico e contrabbasso</li><li>– Batteria</li></ul><p><b>Corsi collettivi:</b></p><ul><li>– Teoria e armonia</li><li>– Musica d’insieme</li></ul><p><b>Corsi speciali</b></p><ul><li>– Tecnico del suono</li><li>– Corso base di produzione video</li></ul>"
     },
     "masterclass": {
       "titolo": "MASTER CLASS",
@@ -221,7 +246,7 @@
     },
     "control": {
       "titolo": "CONTROL ROOM & ISO BOOTH",
-      "testo": "<p><em><strong>La Control room</strong></em> è collegata alle due sale di ripresa e all’ Iso Booth; l’ambiente è stato trattato con bass trap, assorbitori e diffusori unitamente a software di calibratura per un ascolto il più lineare possibile, nel rispetto però degli arredi e degli affreschi e di tutti gli altri elementi architettonici di Palazzo Guarnieri.</p><p>Oltre che per la registrazione la sala è attrezzata anche per il mix ed il mastering utilizzando un sistema “ibrido” che comprende sia l’utilizzo dei migliori software professionali che di diversi outboard analogici con la possibilità di ottenere   un suono assolutamente naturale e trasparente ma anche, volendo, un suono con un carattere più vintage.</p><p>Collegato alla regia, l’<em><strong>Iso Booth</strong></em> consente l’acquisizione di voci e strumenti in condizione di neutralità grazie alla configurazione del materiale fonoassorbente offrendo varie soluzioni in fase di missaggio delle tracce.</p>"
+      "testo": "<p><em><strong>La Control room</strong></em> è collegata alle due sale di ripresa e all’Iso Booth; l’ambiente è stato trattato con bass trap, assorbitori e diffusori unitamente a software di calibratura per un ascolto il più lineare possibile, nel rispetto però degli arredi e degli affreschi e di tutti gli altri elementi architettonici di Palazzo Guarnieri.</p><p>Oltre che per la registrazione la sala è attrezzata anche per il mix ed il mastering utilizzando un sistema “ibrido” che comprende sia l’utilizzo dei migliori software professionali che di diversi outboard analogici con la possibilità di ottenere un suono assolutamente naturale e trasparente ma anche, volendo, un suono con un carattere più vintage.</p><p>Collegato alla regia, l’<em><strong>Iso Booth</strong></em> consente l’acquisizione di voci e strumenti in condizione di neutralità grazie alla configurazione del materiale fonoassorbente offrendo varie soluzioni in fase di missaggio delle tracce.</p>"
     },
     "sale": [
       {
@@ -234,7 +259,7 @@
           "assets/img/DSCF6713-scaled.jpg",
           "assets/img/DSCF6704-scaled.jpg"
         ],
-        "testo": "<p>La sala  dispone di 40 posti a sedere; il palco misura 6m x 4m e sono presenti due americane per 40 fari (PC teatrali, spot a led, barre a led, teste mobili). L’acustica è trattata attraverso pannelli e tendaggi teatrali (Peroni Spa) ed è l’ideale per formazioni acustiche. Le sedute di registrazioni possono essere realizzate con il pubblico presente in sala e comprendere oltre che il tracking audio anche le riprese video multicamera con operatori professionali.</p><p>La sala ospita un pianoforte Yamaha C5</p>"
+        "testo": "<p>La sala dispone di 40 posti a sedere; il palco misura 6m x 4m e sono presenti due americane per 40 fari (PC teatrali, spot a led, barre a led, teste mobili). L’acustica è trattata attraverso pannelli e tendaggi teatrali (Peroni Spa) ed è l’ideale per formazioni acustiche. Le sedute di registrazioni possono essere realizzate con il pubblico presente in sala e comprendere oltre che il tracking audio anche le riprese video multicamera con operatori professionali.</p><p>La sala ospita un pianoforte Yamaha C5</p>"
       },
       {
         "titolo": "CLASSIC HALL",
@@ -245,12 +270,12 @@
           "assets/img/SIR_9202_ridotta.jpg",
           "assets/img/DSCF1194-scaled.jpg"
         ],
-        "testo": "<p>La sala dispone di 60 posti a sedere ; il palco misura 5m x 3m e sono presenti wind up Manfrotto per fari teatrali. L’acustica è caratterizzata da un’ottima riverberazione ed è ideale per pianoforte, strumenti ad arco, ensemble di musica da camera.<br>Le sedute di registrazione possono essere realizzate con il pubblico presente in sala e comprendere oltre che il tracking audio anche le riprese video multicamera con operatori professionali.<br>La sala ospita due pianoforti Bluthner, un ½ coda del 1870 e un ¾ del 1921</p>"
+        "testo": "<p>La sala dispone di 60 posti a sedere; il palco misura 5m x 3m e sono presenti wind up Manfrotto per fari teatrali. L’acustica è caratterizzata da un’ottima riverberazione ed è ideale per pianoforte, strumenti ad arco, ensemble di musica da camera.<br>Le sedute di registrazione possono essere realizzate con il pubblico presente in sala e comprendere oltre che il tracking audio anche le riprese video multicamera con operatori professionali.<br>La sala ospita due pianoforti Bluthner, un ½ coda del 1870 e un ¾ del 1921</p>"
       }
     ],
     "servizi": {
       "titolo": "I NOSTRI SERVIZI",
-      "testo": "<p><strong>Registrazione</strong><br>Lo spazio è pensato per registrare le performances degli artisti con la presenza del pubblico in sala; questo conferisce senza dubbio un particolare pathos alla fase dell’acquisizione e richiede nel contempo grande attenzione e abilità non solo da parte dei musicisti ma anche da parte della squadra di tecnici e operatori impegnata nel live recording.<br>Il nostro ambiente è perfetto per catturare il suono naturale di strumenti come pianoforti, batteria e percussioni, chitarre acustiche, archi e fiati.</p><p><strong>Mixing e Mastering</strong><br>Il nostro studio è stato pensato per occuparsi sia della fase di missaggio che di mastering; l’obiettivo è quello di fornire un prodotto finito e professionale, che possa suonare bene in qualsiasi supporto fisico oppure on line,</p><p><strong>Studio Mobile</strong><br>Per coloro che desiderano registrare fuori dallo studio, offriamo un servizio di registrazione in loco. Il nostro team viaggia con tutta l’attrezzatura necessaria (microfoni, videocamere, mixer ecc.) per catturare la tua performance nella location scelta, assicurando sempre una qualità del suono impeccabile e riprese video sensazionali.</p><p><strong>Residenze artistiche</strong><br>Palazzo Guarnieri è una dimora ricca di arte e di storia; è il luogo ideale per ospitare gli artisti che vogliono risiedere in uno spazio dedicato interamente alla musica.<br>Ci sono il Jazz Club, le sale di ripresa, i pianoforti a disposizione e una cittadina rinascimentale davvero affascinante e con molte cose da vedere.<br>Inoltre appena fuori dal borgo c’è Il Parco Nazionale delle Dolomiti, un ambiente naturale unico al mondo.</p><p><strong>Live Recording Session</strong><br>Questa formula permette agli artisti di realizzare un live recording con il pubblico pagante che concorre alla copertura dei costi di recording; la promozione dell’evento è affidata ad un agenzia specializzata ATR Comunicazione per garantire una buona affluenza al concerto e una adeguata visibilità della proposta artistica</p>"
+      "testo": "<p><strong>Registrazione</strong><br>Lo spazio è pensato per registrare le performances degli artisti con la presenza del pubblico in sala; questo conferisce senza dubbio un particolare pathos alla fase dell’acquisizione e richiede nel contempo grande attenzione e abilità non solo da parte dei musicisti ma anche da parte della squadra di tecnici e operatori impegnata nel live recording.<br>Il nostro ambiente è perfetto per catturare il suono naturale di strumenti come pianoforti, batteria e percussioni, chitarre acustiche, archi e fiati.</p><p><strong>Mixing e Mastering</strong><br>Il nostro studio è stato pensato per occuparsi sia della fase di missaggio che di mastering; l’obiettivo è quello di fornire un prodotto finito e professionale, che possa suonare bene in qualsiasi supporto fisico oppure on line,</p><p><strong>Studio Mobile</strong><br>Per coloro che desiderano registrare fuori dallo studio, offriamo un servizio di registrazione in loco. Il nostro team viaggia con tutta l’attrezzatura necessaria (microfoni, videocamere, mixer ecc.) per catturare la tua performance nella location scelta, assicurando sempre una qualità del suono impeccabile e riprese video sensazionali.</p><p><strong>Residenze artistiche</strong><br>Palazzo Guarnieri è una dimora ricca di arte e di storia; è il luogo ideale per ospitare gli artisti che vogliono risiedere in uno spazio dedicato interamente alla musica.<br>Ci sono il Jazz Club, le sale di ripresa, i pianoforti a disposizione e una cittadina rinascimentale davvero affascinante e con molte cose da vedere.<br>Inoltre appena fuori dal borgo c’è Il Parco Nazionale delle Dolomiti, un ambiente naturale unico al mondo.</p><p><strong>Live Recording Session</strong><br>Questa formula permette agli artisti di realizzare un live recording con il pubblico pagante che concorre alla copertura dei costi di recording; la promozione dell’evento è affidata a un’agenzia specializzata ATR Comunicazione per garantire una buona affluenza al concerto e una adeguata visibilità della proposta artistica</p>"
     }
   },
   "award": {
@@ -266,7 +291,7 @@
     "vincitori": {
       "sfondo": "assets/img/2.jpg",
       "titolo": "Music\nAmbassador\nAward",
-      "testo": "<ul><li>Anno 2017 <strong>Stefano Doglioni</strong> – clarinetto basso, oggi residente a New York</li><li>Anno 2018 <strong>Carlo Cappello</strong> – chitarra, oggi residente a Parigi</li><li>Anno 2019 <strong>Fiammetta Nena</strong> – voce, oggi residente a Londra</li><li>Anno 2020 <strong>Leonardo Dalla Cort</strong> – pianoforte, oggi residente a Ferrara</li><li>Anno 2022 <strong>Cristina e Valerio Bonan </strong>– voce e chitarra, residenti a Padova</li></ul>"
+      "testo": "<ul><li>Anno 2017 <strong>Stefano Doglioni</strong> – clarinetto basso, oggi residente a New York</li><li>Anno 2018 <strong>Carlo Cappello</strong> – chitarra, oggi residente a Parigi</li><li>Anno 2019 <strong>Fiammetta Nena</strong> – voce, oggi residente a Londra</li><li>Anno 2020 <strong>Leonardo Dalla Cort</strong> – pianoforte, oggi residente a Ferrara</li><li>Anno 2022 <strong>Cristina e Valerio Bonan</strong> – voce e chitarra, residenti a Padova</li></ul>"
     },
     "banda": {
       "testo": "UNISONO È DAVVERO ORGOGLIOSA DI DARE QUESTO CONTRIBUTO AL MONDO DELLA MUSICA E AI SUOI NUOVI, FUTURI INTERPRETI E PROTAGONISTI!"
@@ -282,5 +307,9 @@
         }
       ]
     }
+  },
+  "legali": {
+    "privacy": "<p><strong>Ultimo aggiornamento:</strong> ottobre 2026</p>\n<h2>Titolare del trattamento</h2>\n<p>Il titolare del trattamento dei dati è <strong>Nicolò Ferrari Bravo</strong> per UNISONO S.R.L., Piazza Vittorio Emanuele, 4 – 32032 Feltre (BL), P.IVA e C.F. 01043840253, PEC unisono@pec.it.<br>Per qualsiasi richiesta sui tuoi dati puoi scrivere a <a href=\"mailto:privacy@unisonofactory.com\">privacy@unisonofactory.com</a>.</p>\n<h2>Quali dati trattiamo</h2>\n<ul><li><strong>Dati che ci invii tu</strong>: nome, indirizzo email, numero di telefono e contenuto del messaggio quando ci contatti via email, telefono o WhatsApp, oppure tramite il modulo di contatto.</li><li><strong>Dati tecnici di navigazione</strong>: i sistemi che fanno funzionare il sito (hosting Vercel) registrano automaticamente dati come indirizzo IP, tipo di browser e pagine visitate, solo per garantire il funzionamento e la sicurezza del sito.</li></ul>\n<h2>Perché li trattiamo e su quale base</h2>\n<ul><li>Rispondere alle tue richieste e gestire prenotazioni, iscrizioni a corsi e masterclass: esecuzione di misure precontrattuali o di un contratto (art. 6.1.b GDPR).</li><li>Garantire il funzionamento e la sicurezza del sito: legittimo interesse del titolare (art. 6.1.f GDPR).</li><li>Adempiere a obblighi di legge, ad esempio fiscali: obbligo legale (art. 6.1.c GDPR).</li></ul>\n<p>Non usiamo i tuoi dati per profilazione e non li vendiamo a terzi.</p>\n<h2>Come vengono inviati i messaggi</h2>\n<p>Il modulo di contatto non salva dati sul sito: apre WhatsApp oppure il tuo programma di posta con il messaggio già compilato. Il messaggio ci arriva quindi tramite WhatsApp (Meta Platforms) o tramite il tuo servizio di posta, secondo le loro condizioni.</p>\n<h2>Per quanto tempo li conserviamo</h2>\n<p>I dati delle richieste di contatto sono conservati per il tempo necessario a rispondere e a gestire il rapporto con te, e comunque non oltre 24 mesi dall’ultimo contatto, salvo obblighi di legge (ad esempio i documenti fiscali, conservati per 10 anni).</p>\n<h2>Chi può vedere i dati</h2>\n<p>Il personale di UNISONO S.R.L. autorizzato e i fornitori che ci aiutano a far funzionare i servizi (hosting del sito, posta elettronica), nominati responsabili del trattamento quando previsto. Alcuni fornitori possono trovarsi fuori dall’Unione Europea: in questi casi il trasferimento avviene con le garanzie previste dal GDPR (decisioni di adeguatezza o clausole contrattuali standard).</p>\n<h2>I tuoi diritti</h2>\n<p>Puoi chiedere in qualsiasi momento di accedere ai tuoi dati, correggerli, cancellarli, limitarne il trattamento, opporti al trattamento o riceverli in un formato leggibile (artt. 15-22 GDPR), scrivendo a <a href=\"mailto:privacy@unisonofactory.com\">privacy@unisonofactory.com</a>. Hai anche il diritto di presentare reclamo al Garante per la protezione dei dati personali (<a href=\"https://www.garanteprivacy.it\">www.garanteprivacy.it</a>).</p>",
+    "cookie": "<p><strong>Ultimo aggiornamento:</strong> ottobre 2026</p>\n<h2>Cosa sono i cookie</h2>\n<p>I cookie sono piccoli file che un sito salva nel browser per ricordare informazioni durante la navigazione.</p>\n<h2>Cookie usati da questo sito</h2>\n<p>Questo sito <strong>non usa cookie di profilazione, di statistica o di marketing</strong> e non installa cookie di terze parti. Per questo non ti chiediamo il consenso con un banner.</p>\n<ul><li><strong>Cookie tecnico di accesso</strong> (<em>unisono_admin</em>): viene salvato solo quando il personale autorizzato entra nell’area riservata di gestione del sito, e serve a mantenere l’accesso. Dura al massimo 12 ore.</li><li><strong>Preferenza di visualizzazione</strong>: se scegli di vedere un’anteprima dello stile grafico, il browser ricorda la scelta in modo locale (localStorage), senza inviarla a nessuno.</li></ul>\n<p>I caratteri tipografici sono ospitati direttamente sul nostro sito, quindi la navigazione non invia dati a Google Fonts.</p>\n<h2>Link ad altri siti</h2>\n<p>I link verso Facebook, Instagram, YouTube, WhatsApp e Google Maps portano a siti esterni, che applicano le proprie regole sui cookie solo quando li apri.</p>\n<h2>Come gestire i cookie</h2>\n<p>Puoi cancellare o bloccare i cookie dalle impostazioni del tuo browser. Bloccando i cookie tecnici l’area riservata non funziona, ma il resto del sito sì.</p>\n<p>Per domande scrivi a <a href=\"mailto:privacy@unisonofactory.com\">privacy@unisonofactory.com</a>.</p>"
   }
 }

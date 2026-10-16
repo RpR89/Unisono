@@ -28,7 +28,10 @@ const REDIRECT_SCUOLA = `<!DOCTYPE html>
 <body><p><a href="../scuola-di-musica/index.html">Scuola &amp; Corsi</a></p></body></html>
 `;
 
-export async function build({ root = ROOT, out = join(ROOT, 'dist'), quiet = false } = {}) {
+// Su Vercel le immagini passano dal servizio di ottimizzazione (WebP/AVIF, misura giusta per ogni schermo)
+const OPTIMIZE = Boolean(process.env.VERCEL) && process.env.OTTIMIZZA_IMMAGINI !== '0';
+
+export async function build({ root = ROOT, out = join(ROOT, 'dist'), quiet = false, optimizeImages = OPTIMIZE } = {}) {
   const content = await loadContent(root);
   const errors = validateContent(content);
   if (errors.length) throw new Error('Contenuti non validi:\n- ' + errors.join('\n- '));
@@ -40,7 +43,7 @@ export async function build({ root = ROOT, out = join(ROOT, 'dist'), quiet = fal
     await cp(join(root, dir), join(out, dir), { recursive: true });
   }
 
-  const pages = renderSite(content);
+  const pages = renderSite(content, { optimizeImages });
   for (const { path, html } of pages) {
     const file = join(out, path);
     await mkdir(dirname(file), { recursive: true });
@@ -48,6 +51,20 @@ export async function build({ root = ROOT, out = join(ROOT, 'dist'), quiet = fal
   }
 
   await writeFile(join(out, 'version.json'), JSON.stringify(content.versione) + '\n');
+
+  // Indicazioni per i motori di ricerca
+  const base = String(content.site.generale.url_sito || '').replace(/\/+$/, '');
+  const urls = pages.map((p) => `${base}/${p.path.replace(/index\.html$/, '')}`);
+  await writeFile(join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}
+</urlset>
+`);
+  await writeFile(join(out, 'robots.txt'), `User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Sitemap: ${base}/sitemap.xml
+`);
 
   await mkdir(join(out, 'scuola'), { recursive: true });
   await writeFile(join(out, 'scuola/index.html'), REDIRECT_SCUOLA);

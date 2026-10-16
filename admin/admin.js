@@ -1,6 +1,6 @@
 // Pannello di gestione dei contenuti di UNISONO Factory.
 
-import { renderPage, slugify, RESERVED_SLUGS, eventPath } from '/lib/render.mjs';
+import { renderPage, slugify, RESERVED_SLUGS, eventPath, sortEvents, formatDateRange, isPast, todayInItaly } from '/lib/render.mjs';
 import { SECTIONS, EVENT_FIELDS, LINK_OPTIONS } from '/lib/schema.mjs';
 import { sanitizeRich } from '/lib/sanitize.mjs';
 
@@ -424,7 +424,7 @@ function pickFile(accept) {
   });
 }
 
-const MAX_SIDE = 2400;
+const MAX_SIDE = 2000;
 const MAX_BYTES = 4 * 1024 * 1024;
 
 // Riduce le immagini troppo grandi prima di caricarle
@@ -433,19 +433,17 @@ async function prepareImage(file) {
   if (file.type === 'image/gif') return file;
   const bitmap = await createImageBitmap(file);
   const big = Math.max(bitmap.width, bitmap.height) > MAX_SIDE;
-  if (!big && file.size <= 1.5 * 1024 * 1024) return file;
+  if (!big && file.size <= 500 * 1024) return file;
   const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   const ctx = canvas.getContext('2d');
   ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  // I PNG potrebbero avere parti trasparenti (loghi): si prova il WEBP, che le conserva
-  let blob = file.type === 'image/png'
-    ? await new Promise((r) => canvas.toBlob(r, 'image/webp', 0.9))
-    : null;
-  if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => canvas.toBlob(r, 'image/jpeg', 0.85));
-  return blob;
+  // WEBP: file leggeri e conserva le parti trasparenti dei loghi. Se il browser non lo supporta, JPEG.
+  let blob = await new Promise((r) => canvas.toBlob(r, 'image/webp', 0.82));
+  if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => canvas.toBlob(r, file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.85));
+  return blob.size < file.size ? blob : file;
 }
 
 async function uploadFile(kind) {
@@ -524,6 +522,12 @@ function field(def, value, onChange) {
       return wrap(label, mediaField(def, value, onChange, 'pdf'), def.aiuto);
     case 'images':
       return wrap(label, galleryField(def, value || [], onChange), def.aiuto);
+    case 'date': {
+      const input = el('input', { type: 'date', value: value || '' });
+      input.addEventListener('change', () => onChange(input.value));
+      const clear = el('button', { type: 'button', class: 'btn btn-sm btn-ghost', onclick: () => { input.value = ''; onChange(''); } }, 'Togli data');
+      return wrap(label, el('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } }, input, clear), def.aiuto);
+    }
     case 'select': {
       const sel = el('select', {}, def.opzioni.map(([v, t]) => el('option', { value: v, selected: v === value }, t)));
       sel.addEventListener('change', () => onChange(sel.value));
@@ -759,7 +763,11 @@ function addEvent(tipo) {
     titolo,
     locandina: '',
     immagine_home: '',
-    testo: `<h2>${titolo.toUpperCase()}</h2><p><strong>Data e orario</strong></p><p>Luogo</p><p>Descrizione</p>${contactsHtml()}`,
+    data: '',
+    data_fine: '',
+    orario: tipo === 'novita' ? '' : 'ore 21.30',
+    luogo: tipo === 'novita' ? '' : 'Modern Hall',
+    testo: `<h2>${titolo.toUpperCase()}</h2><p>Descrizione dell'evento: musicisti, programma, prezzo.</p>${contactsHtml()}`,
   };
   const list = events();
   const firstSame = list.findIndex((e) => (e.tipo === 'novita') === (tipo === 'novita'));
@@ -784,14 +792,15 @@ function moveEvent(ev, dir) {
 function renderEventList(root) {
   setTitle('Locandine ed eventi');
   root.append(
-    el('p', { class: 'intro', text: 'Qui gestisci le locandine della Home. Ogni locandina apre la sua pagina con il testo dell\'evento. Clicca una locandina per modificarla, usa le frecce per cambiare l\'ordine.' }),
+    el('p', { class: 'intro', text: 'Qui gestisci le locandine della Home. Ogni locandina apre la sua pagina con il testo dell\'evento. Gli eventi con la data si mettono in ordine da soli e, una volta conclusi, passano tra gli "Eventi passati". Per quelli senza data usa le frecce.' }),
     el('div', { class: 'ev-toolbar' },
       el('button', { type: 'button', class: 'btn btn-primary', onclick: () => addEvent('evento') }, '+ Nuovo evento'),
       el('button', { type: 'button', class: 'btn', onclick: () => addEvent('novita') }, '+ Nuova novità')),
   );
   const groups = [['evento', 'I prossimi eventi'], ['novita', 'Novità']];
   for (const [tipo, titolo] of groups) {
-    const list = events().filter((e) => (e.tipo === 'novita') === (tipo === 'novita'));
+    const list = sortEvents(events().filter((e) => (e.tipo === 'novita') === (tipo === 'novita')));
+    const today = todayInItaly();
     root.append(el('h2', { class: 'ev-section-title', text: `${titolo} (${list.length})` }));
     if (!list.length) { root.append(el('p', { class: 'help', text: 'Nessun elemento.' })); continue; }
     root.append(el('div', { class: 'ev-grid' }, list.map((ev, i) => el('div', {
@@ -801,10 +810,13 @@ function renderEventList(root) {
       el('div', { class: 'ev-poster', style: ev.locandina ? { backgroundImage: `url("${resolveAsset(ev.immagine_home || ev.locandina)}")` } : {} }, ev.locandina ? '' : 'Senza locandina'),
       el('div', { class: 'ev-info' },
         el('div', { class: 'ev-title', text: ev.titolo || '(senza titolo)' }),
+        ev.data ? el('div', { class: 'ev-date', text: formatDateRange(ev.data, ev.data_fine, { weekday: false }) }) : null,
         el('div', { class: 'badges' },
           ev.visibile === false ? el('span', { class: 'badge off', text: 'Nascosto' }) : null,
+          isPast(ev, today) ? el('span', { class: 'badge off', text: 'Concluso · in archivio' }) : null,
+          tipo === 'evento' && !ev.data ? el('span', { class: 'badge off', text: 'Senza data' }) : null,
           state.newSlugs.has(ev.slug) ? el('span', { class: 'badge new', text: 'Da pubblicare' }) : null)),
-      el('div', { class: 'ev-move' },
+      ev.data ? null : el('div', { class: 'ev-move' },
         el('button', { type: 'button', title: 'Sposta prima', disabled: i === 0, onclick: (e) => { e.stopPropagation(); moveEvent(ev, -1); } }, '◀'),
         el('button', { type: 'button', title: 'Sposta dopo', disabled: i === list.length - 1, onclick: (e) => { e.stopPropagation(); moveEvent(ev, 1); } }, '▶')),
     ))));

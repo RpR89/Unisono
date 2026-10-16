@@ -8,7 +8,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sanitizeRich } from '../lib/sanitize.mjs';
-import { renderSite, renderPage, slugify } from '../lib/render.mjs';
+import { renderSite, renderPage, slugify, formatDateRange, sortEvents, whatsappUrl } from '../lib/render.mjs';
 import { validateContent, isAssetPath } from '../lib/validate.mjs';
 import { build, loadContent } from '../scripts/build.mjs';
 import { createSessionToken, verifySessionToken, hashPassword, verifyPassword } from '../api/_lib/auth.js';
@@ -104,7 +104,9 @@ test('build crea la cartella dist con version.json', async () => {
     const v = JSON.parse(await readFile(join(out, 'version.json'), 'utf8'));
     const text = await readFile(join(ROOT, 'content/site.json'), 'utf8');
     assert.equal(v.site, gitBlobSha(text));
-    assert.match(await readFile(join(out, 'index.html'), 'utf8'), /<title>UNISONO Factory<\/title>/);
+    assert.match(await readFile(join(out, 'index.html'), 'utf8'), /<title>UNISONO Factory – /);
+    await readFile(join(out, 'sitemap.xml'));
+    await readFile(join(out, 'privacy-policy/index.html'));
     await readFile(join(out, 'admin/index.html'));
     await readFile(join(out, 'scuola/index.html'));
   } finally {
@@ -201,4 +203,56 @@ test('GitHubStore rifiuta di sovrascrivere modifiche altrui', async () => {
     (err) => err.status === 409,
   );
   assert.equal(gh.files['content/site.json'], '{"a":1}\n');
+});
+
+// ---------------------------------------------------------------- Date, prenotazioni, immagini
+
+test('formatDateRange scrive le date in italiano', () => {
+  assert.equal(formatDateRange('2026-11-02'), 'lunedì 2 novembre 2026');
+  assert.equal(formatDateRange('2026-10-23', '2026-10-24'), '23 – 24 ottobre 2026');
+  assert.equal(formatDateRange('2026-08-30', '2026-09-03'), '30 agosto – 3 settembre 2026');
+  assert.equal(formatDateRange(''), '');
+});
+
+test('gli eventi con data vengono ordinati dal più vicino', () => {
+  const list = sortEvents([{ slug: 'c' }, { slug: 'b', data: '2026-12-01' }, { slug: 'a', data: '2026-11-01' }]);
+  assert.deepEqual(list.map((e) => e.slug), ['a', 'b', 'c']);
+});
+
+test('gli eventi passati spariscono dalla Home e finiscono in archivio', async () => {
+  const content = await loadContent(ROOT);
+  const home = renderPage('home', content, { today: '2026-10-16' });
+  assert.match(home, /m-s-s-m\/index\.html/);
+  assert.doesNotMatch(home, /rita-marcotulli-ensemble\/index\.html/);
+  assert.match(home, /eventi-passati\/index\.html/);
+  const archivio = renderPage('archivio', content, { today: '2026-10-16' });
+  assert.match(archivio, /<article class="card" data-fine="2026-04-25">/);
+  const dopo = renderPage('home', content, { today: '2026-10-25' });
+  assert.doesNotMatch(dopo, /href="m-s-s-m\/index\.html"/);
+});
+
+test('le masterclass concluse non compaiono', async () => {
+  const content = await loadContent(ROOT);
+  assert.doesNotMatch(renderPage('home', content, { today: '2026-10-16' }), /DOWNLOAD INFO/);
+  assert.match(renderPage('home', content, { today: '2026-08-01' }), /DOWNLOAD INFO/);
+});
+
+test('la pagina dell\'evento ha data, prenotazione WhatsApp e dati per Google', async () => {
+  const content = await loadContent(ROOT);
+  const html = renderPage('evento:m-s-s-m', content, { today: '2026-10-16' });
+  assert.match(html, /23 – 24 ottobre 2026/);
+  assert.match(html, /https:\/\/wa\.me\/393887884850\?text=/);
+  assert.match(html, /"@type":"Event"/);
+  assert.match(html, /"startDate":"2026-10-23T21:30"/);
+  assert.match(html, /og:image" content="https:\/\/unisono-azure\.vercel\.app\/assets\/img\/MCCOMB-scaled\.png"/);
+  assert.equal(whatsappUrl(content.site), 'https://wa.me/393887884850');
+});
+
+test('con l\'ottimizzazione le immagini passano dal servizio di Vercel', async () => {
+  const content = await loadContent(ROOT);
+  const html = renderPage('evento:m-s-s-m', content, { optimizeImages: true });
+  assert.match(html, /src="\/_vercel\/image\?url=%2Fassets%2Fimg%2FMCCOMB-scaled\.png&amp;w=1200&amp;q=75"/);
+  assert.match(html, /srcset="[^"]*w=384&amp;q=75 384w/);
+  assert.match(html, /onerror=/);
+  assert.doesNotMatch(renderPage('evento:m-s-s-m', content), /_vercel\/image/);
 });

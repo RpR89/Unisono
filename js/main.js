@@ -4,6 +4,14 @@
 
   document.documentElement.classList.add('js');
 
+  // Anteprima del nuovo stile: un'etichetta permette di confrontarlo con quello attuale
+  if (document.documentElement.classList.contains('tema-nuovo')) {
+    var badge = document.createElement('div');
+    badge.className = 'stile-badge';
+    badge.innerHTML = 'Anteprima nuovo stile · <a href="?stile=attuale">torna all\'attuale</a>';
+    document.body.appendChild(badge);
+  }
+
   var header = document.querySelector('.site-header');
   var toggle = document.querySelector('.menu-toggle');
   var toTop = document.querySelector('.to-top');
@@ -117,13 +125,40 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
-  // Modulo di contatto: apre il programma di posta con il messaggio già compilato
+  // Eventi passati: le pagine sono statiche, quindi il browser nasconde ciò che è già concluso
+  var today = (function () {
+    try { return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Rome' }); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  })();
+  var archive = document.querySelector('.archivio');
+  document.querySelectorAll('[data-fine]').forEach(function (el) {
+    var past = el.getAttribute('data-fine') < today;
+    if (el.classList.contains('event-box')) {
+      el.querySelector('.event-past').hidden = !past;
+      el.querySelector('.event-actions').hidden = past;
+    } else if (archive && archive.contains(el)) {
+      el.hidden = !past;
+    } else if (past) {
+      el.hidden = true;
+    }
+  });
+  var cards = document.querySelector('#events .cards');
+  var empty = document.querySelector('#events .cards-empty');
+  if (cards && empty) empty.hidden = !!cards.querySelector('.card:not([hidden])');
+
+  // Modulo di contatto: invia il messaggio con WhatsApp oppure con il programma di posta
   document.querySelectorAll('form.contact-form').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var nome = form.elements.nome.value.trim();
       var email = form.elements.email.value.trim();
       var messaggio = form.elements.messaggio.value.trim();
+      var via = e.submitter && e.submitter.value === 'email' ? 'email' : 'whatsapp';
+      if (via === 'whatsapp' && form.dataset.wa) {
+        var text = 'Ciao, sono ' + nome + ' (' + email + ').\n\n' + messaggio;
+        window.open(form.dataset.wa + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+        return;
+      }
       var subject = 'Richiesta informazioni dal sito - ' + nome;
       var body = messaggio + '\n\n' + nome + '\n' + email;
       window.location.href = 'mailto:' + form.dataset.to +
