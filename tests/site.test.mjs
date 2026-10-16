@@ -69,7 +69,7 @@ test('il sito genera tutte le pagine con testi e immagini', async () => {
     assert.ok(paths.includes(p), p);
   }
   const home = pages.find((p) => p.path === 'index.html').html;
-  assert.match(home, /I PROSSIMI EVENTI/);
+  assert.match(home, /I prossimi eventi/);
   assert.match(home, /href="m-s-s-m\/index\.html"/);
   assert.match(home, /src="assets\/img\/MCCOMB\.jpg"/);
   const evento = pages.find((p) => p.path === 'm-s-s-m/index.html').html;
@@ -249,8 +249,8 @@ test('le novità usano la vetrina con le copertine', async () => {
 
 test('le masterclass concluse non compaiono', async () => {
   const content = await loadContent(ROOT);
-  assert.doesNotMatch(renderPage('home', content, { today: '2026-10-16' }), /DOWNLOAD INFO/);
-  assert.match(renderPage('home', content, { today: '2026-08-01' }), /DOWNLOAD INFO/);
+  assert.doesNotMatch(renderPage('home', content, { today: '2026-10-16' }), /Scarica il programma/);
+  assert.match(renderPage('home', content, { today: '2026-08-01' }), /Scarica il programma/);
 });
 
 test('la pagina dell\'evento ha data, prenotazione WhatsApp e dati per Google', async () => {

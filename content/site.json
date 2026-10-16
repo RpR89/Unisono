@@ -41,10 +41,12 @@
       "pulsante_prenota": "Prenota"
     },
     "eventi": {
-      "titolo": "I PROSSIMI EVENTI",
-      "info": "PER INFO E PRENOTAZIONI:",
+      "titolo": "I prossimi eventi",
+      "info": "Per info e prenotazioni:",
       "pulsante": "Scopri e prenota",
-      "vuoto": "Nuove date in arrivo. Seguici su Instagram o scrivici su WhatsApp per sapere i prossimi concerti."
+      "vuoto": "Nuove date in arrivo. Seguici su Instagram o scrivici su WhatsApp per sapere i prossimi concerti.",
+      "etichetta": "In programma",
+      "testo": "<p>Concerti, workshop e serate a Palazzo Guarnieri. Prenota il tuo posto: le sale sono intime e i posti limitati.</p>"
     },
     "novita": {
       "titolo": "Novità",
@@ -55,36 +57,40 @@
       "testo": "<p>Le produzioni della nostra etichetta, registrate dal vivo nelle sale di Palazzo Guarnieri.</p>"
     },
     "masterclass": {
-      "titolo": "MASTERCLASS",
+      "titolo": "Masterclass",
       "corsi": [
         {
           "immagine": "assets/img/Massimiliano-ferrati-quadrata.png",
           "testo": "<p><strong>MASTERCLASS PER PIANOFORTE E MUSICA DA CAMERA</strong><br>MASSIMILIANO FERRATI</p><p>Repertorio solistico e musica da camera<br>Feltre (BL) 30 Agosto, 1 – 2  – 3 Settembre 2026</p>",
           "pdf": "assets/pdf/masterclass-pianoforte-massimiliano-ferrati-2026.pdf",
-          "pulsante": "DOWNLOAD INFO",
+          "pulsante": "Scarica il programma",
           "data_fine": "2026-09-03"
         },
         {
           "immagine": "assets/img/masterclass-quadrata.png",
           "testo": "<p><strong>MASTERCLASS DI VIOLONCELLO E MUSICA DA CAMERA</strong><br><em>PAOLO ANDRIOTTI</em></p><p>Repertorio Solistico, Cameristico e Orchestrale<br>Feltre (BL) 30 Agosto, 1 – 2  – 3 Settembre 2026</p>",
           "pdf": "assets/pdf/masterclass-violoncello-paolo-andriotti-2026.pdf",
-          "pulsante": "DOWNLOAD INFO",
+          "pulsante": "Scarica il programma",
           "data_fine": "2026-09-03"
         }
-      ]
+      ],
+      "etichetta": "Alta formazione",
+      "testo": ""
     },
     "mondo": {
       "sfondo": "assets/img/8_mod_2.jpg",
       "logo": "assets/img/Unisono-Factory-bianco.png",
-      "titolo": "un mondo di musica…",
-      "testo": "<p>A <strong>Palazzo Guarnieri</strong> trovi un mondo di musica: Il <strong>Jazz Cafè</strong> con bar, cucina e musica dal vivo, il <strong>Centro di Musica</strong> con corsi di musica e masterclass tutto l’anno, due sale concerti (<strong>Classic Hall</strong> e <strong>Modern Hall</strong>) per assistere a grandi eventi di musica classica, jazz e pop e <strong>Studio Recording</strong> per le produzioni dal vivo.</p>"
+      "titolo": "Un mondo di musica",
+      "testo": "<p>A <strong>Palazzo Guarnieri</strong> trovi un mondo di musica: Il <strong>Jazz Cafè</strong> con bar, cucina e musica dal vivo, il <strong>Centro di Musica</strong> con corsi di musica e masterclass tutto l’anno, due sale concerti (<strong>Classic Hall</strong> e <strong>Modern Hall</strong>) per assistere a grandi eventi di musica classica, jazz e pop e <strong>Studio Recording</strong> per le produzioni dal vivo.</p>",
+      "etichetta": "Palazzo Guarnieri"
     },
     "jazz": {
       "sfondo": "assets/img/8.jpg",
       "logo": "assets/img/semitrasparente.png",
       "titolo": "Unico\nintimo\naccogliente",
       "pulsante": "Entra nel Jazz Cafè",
-      "testo": "<p>Al piano terra di Palazzo Guarnieri si trova il <b>Jazz Cafè</b>; qui hanno suonato in 28 anni di attività alcuni fra i migliori jazzisti italiani (Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pieranunzi, ecc.) e musicisti americani (Kurt Rosenwinkel, Ethan Iverson, Bill Stewart, Jerry Bergonzi, ecc)</p><p>Centinaia e centinaia di concerti, suoni, emozioni e tanta passione hanno da sempre animato la vita e la storia del Jazz Cafè facendolo conoscere in tutta Italia e all’estero.</p>"
+      "testo": "<p>Al piano terra di Palazzo Guarnieri si trova il <b>Jazz Cafè</b>; qui hanno suonato in 28 anni di attività alcuni fra i migliori jazzisti italiani (Paolo Fresu, Enrico Rava, Fabrizio Bosso, Danilo Rea, Roberto Gatto, Claudio Fasoli, Enrico Pieranunzi, ecc.) e musicisti americani (Kurt Rosenwinkel, Ethan Iverson, Bill Stewart, Jerry Bergonzi, ecc)</p><p>Centinaia e centinaia di concerti, suoni, emozioni e tanta passione hanno da sempre animato la vita e la storia del Jazz Cafè facendolo conoscere in tutta Italia e all’estero.</p>",
+      "etichetta": "Jazz Cafè & Restaurant"
     },
     "centro": {
       "sfondo": "assets/img/eleonora_centa-18-scaled.jpg",
@@ -102,26 +108,30 @@
           "link": "scuola"
         }
       ],
-      "nota": "Scorri le immagini a destra e sinistra (o usa le frecce) per scoprire tutte le attività del CENTRO MUSICA UNISONO"
+      "nota": "Scorri le immagini a destra e sinistra (o usa le frecce) per scoprire tutte le attività del CENTRO MUSICA UNISONO",
+      "etichetta": "Scuola, corsi e masterclass dal 2001"
     },
     "studios": {
       "sfondo": "assets/img/DSCF1624.jpg",
       "titolo": "Unisono\nStudios",
-      "pulsante": "Scopri di piu'",
-      "testo": "<p>Due sale di ripresa, <strong>la Classic Hall e la Modern Hall</strong> per la produzione dei grandi eventi dal vivo; un sistema di ripresa video in multicamera firmato <strong>Black Magic Design</strong>, la possibilità di risiedere per tutta la durata della produzione in una dimora storica e di vivere l’atmosfera e la storia di un antico borgo rinascimentale, una backline di prima scelta sempre a disposizione degli artisti, uno staff di tecnici molto preparati con i quali lavorare, la possibilità di utilizzare un servizio professionale di ufficio stampa e comunicazione per gli show case e le presentazioni alle riviste di settore e network specializzati dei prodotti realizzati…</p>"
+      "pulsante": "Scopri di più",
+      "testo": "<p>Due sale di ripresa, <strong>la Classic Hall e la Modern Hall</strong> per la produzione dei grandi eventi dal vivo; un sistema di ripresa video in multicamera firmato <strong>Black Magic Design</strong>, la possibilità di risiedere per tutta la durata della produzione in una dimora storica e di vivere l’atmosfera e la storia di un antico borgo rinascimentale, una backline di prima scelta sempre a disposizione degli artisti, uno staff di tecnici molto preparati con i quali lavorare, la possibilità di utilizzare un servizio professionale di ufficio stampa e comunicazione per gli show case e le presentazioni alle riviste di settore e network specializzati dei prodotti realizzati…</p>",
+      "etichetta": "Registrazioni dal vivo"
     },
     "family": {
       "titolo": "Unisono\nFamily",
       "testo": "<p>Qui troverai la <strong>nostra Famiglia</strong>, il roster degli artisti che collaborano con noi.</p>",
-      "pulsante": "Scopri di piu'",
+      "pulsante": "Scopri di più",
       "pdf": "assets/pdf/Unisono-Family-new.pdf",
-      "immagine": "assets/img/Luppi_ridotto-4764-scaled.jpg"
+      "immagine": "assets/img/Luppi_ridotto-4764-scaled.jpg",
+      "etichetta": "Gli artisti"
     },
     "palazzo": {
       "sfondo": "assets/img/Esterno-Palazzo-Guarnieri.jpg",
       "titolo": "Palazzo",
       "sottotitolo": "Guarnieri",
-      "testo": "<p>Palazzo Guarnieri si trova In Piazza Maggiore nel centro antico di Feltre, comune compreso nel parco nazionale delle Dolomiti bellunesi, patrimonio dell’Unesco. Parte della costruzione sopravvisse all’incendio totale della città del 1510. Nel corso dell’Ottocento, l’architetto Giuseppe Segusini trasse spunto dall’angolata delle antiche finestre gotiche per comporre l’attuale costruzione neogotica. Essa fu brevemente occupata, nel primo conflitto mondiale, dall’ultimo imperatore degli Asburgo, il beato Carlo I. I piani affrescati superiori ospitano da oltre vent’anni diverse attività, dalla musica classica a quella moderna, in particolare jazz.</p>"
+      "testo": "<p>Palazzo Guarnieri si trova In Piazza Maggiore nel centro antico di Feltre, comune compreso nel parco nazionale delle Dolomiti bellunesi, patrimonio dell’Unesco. Parte della costruzione sopravvisse all’incendio totale della città del 1510. Nel corso dell’Ottocento, l’architetto Giuseppe Segusini trasse spunto dall’angolata delle antiche finestre gotiche per comporre l’attuale costruzione neogotica. Essa fu brevemente occupata, nel primo conflitto mondiale, dall’ultimo imperatore degli Asburgo, il beato Carlo I. I piani affrescati superiori ospitano da oltre vent’anni diverse attività, dalla musica classica a quella moderna, in particolare jazz.</p>",
+      "etichetta": "La nostra casa"
     },
     "gallery": {
       "sfondo": "assets/img/5.jpg",
@@ -134,12 +144,15 @@
       "testo": "<p>(IN ALLESTIMENTO) Galleria di foto e video degli artisti che negli anni si sono esibiti all'Unisono Jazz Club</p>",
       "pulsante": "In allestimento",
       "link": "",
-      "visibile": false
+      "visibile": false,
+      "etichetta": "Galleria"
     },
     "sponsor": {
       "immagine": "assets/img/sponsor-1.png",
       "banner": "assets/img/Banner-Progetto-Finanziato-POC-scaled.jpg",
-      "link": "https://www.veneto-rivers-holiday.com/it/veneto-rivers-experience"
+      "link": "https://www.veneto-rivers-holiday.com/it/veneto-rivers-experience",
+      "etichetta": "Partner",
+      "titolo": "Con il sostegno di"
     },
     "dove": {
       "visibile": true,
@@ -148,7 +161,8 @@
       "indirizzo": "Palazzo Guarnieri\nPiazza Vittorio Emanuele, 4 – 32032 Feltre (BL)",
       "mappa": "https://www.google.com/maps/search/?api=1&query=Palazzo+Guarnieri+Feltre",
       "pulsante_mappa": "Apri in Google Maps",
-      "immagine": "assets/img/Esterno-Palazzo-Guarnieri.jpg"
+      "immagine": "assets/img/Esterno-Palazzo-Guarnieri.jpg",
+      "etichetta": "Vieni a trovarci"
     }
   },
   "jazzcafe": {

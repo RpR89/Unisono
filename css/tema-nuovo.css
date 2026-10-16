@@ -111,3 +111,10 @@
 }
 .stile-badge a { color: var(--ottone, #c9a24d); }
 @media (max-width: 959px) { .stile-badge { bottom: 70px; } }
+
+/* Sezioni scure della Home: le schede restano trasparenti */
+.tema-nuovo .dk .card { background: transparent; padding: 0; box-shadow: none; border-radius: 0; overflow: visible; }
+.tema-nuovo .dk .card:hover { transform: none; box-shadow: none; }
+.tema-nuovo .dk .card > *:not(.card-media) { margin-left: 0; margin-right: 0; }
+.tema-nuovo .dk .card-date { color: var(--ottone); }
+.tema-nuovo .dk .btn:not(.btn-outline):not(.btn-wa):not(.btn-rosso):not(.btn-gold) { background: #fff; color: #141618; }
