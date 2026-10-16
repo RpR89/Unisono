@@ -160,6 +160,10 @@
       homeCards.appendChild(c);
     });
   }
+  // Masterclass: restano visibili, quelle concluse prendono l'etichetta "Concluso"
+  document.querySelectorAll('[data-mc-fine]').forEach(function (el) {
+    el.classList.toggle('is-past', el.getAttribute('data-mc-fine') < today);
+  });
   var empty = document.querySelector('#events .cards-empty');
   if (homeCards && empty) empty.hidden = !!homeCards.querySelector('.card:not([hidden])');
 

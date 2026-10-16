@@ -1656,3 +1656,24 @@ main { padding-top: var(--header-h); }
 }
 .lt .tile.plain { background: radial-gradient(ellipse at 30% 20%, rgba(212, 17, 30, .35), transparent 70%), var(--dk); }
 .lt .tile h3 { color: var(--bianco); }
+
+/* Masterclass concluse: restano visibili con l'etichetta */
+.mc-card .framed { position: relative; }
+.mc-card .badge-past { display: none; }
+.mc-card.is-past .badge-past {
+  display: block;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(20, 22, 24, .85);
+  color: var(--bianco);
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.mc-card .mc-text p:first-child strong { font-size: 17px; }

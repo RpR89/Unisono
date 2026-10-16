@@ -247,10 +247,14 @@ test('le novità usano la vetrina con le copertine', async () => {
   assert.match(home, /Danilo Memoli · piano solo/);
 });
 
-test('le masterclass concluse non compaiono', async () => {
+test('le masterclass restano visibili anche concluse, con l\'etichetta', async () => {
   const content = await loadContent(ROOT);
-  assert.doesNotMatch(renderPage('home', content, { today: '2026-10-16' }), /Scarica il programma/);
-  assert.match(renderPage('home', content, { today: '2026-08-01' }), /Scarica il programma/);
+  const dopo = renderPage('home', content, { today: '2026-10-16' });
+  assert.match(dopo, /id="masterclass"/);
+  assert.match(dopo, /MASSIMILIANO FERRATI/);
+  assert.match(dopo, /class="mc-card reveal is-past" data-mc-fine="2026-09-03"/);
+  const prima = renderPage('home', content, { today: '2026-08-01' });
+  assert.match(prima, /class="mc-card reveal" data-mc-fine="2026-09-03"/);
 });
 
 test('la pagina dell\'evento ha data, prenotazione WhatsApp e dati per Google', async () => {
