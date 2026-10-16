@@ -3,13 +3,14 @@
 // Interfaccia comune:
 //   readText(path)            -> { text, sha } | null
 //   readFile(path)            -> Buffer | null
+//   listDir(path)             -> [nomi dei file] (vuoto se la cartella non esiste)
 //   createUpload(buffer)      -> id da passare a commit()
 //   commit({ files, message, expect })
 //       files:  [{ path, text }] oppure [{ path, upload: id }]
 //       expect: { path: sha } per rilevare modifiche concorrenti (409)
 
 import { createHash, randomBytes } from 'node:crypto';
-import { readFile, writeFile, mkdir, rename, access } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rename, access, readdir } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { httpError } from './http.js';
@@ -76,6 +77,11 @@ export class GitHubStore {
     return this.api('GET', this.contentsPath(path), null, 'application/vnd.github.raw');
   }
 
+  async listDir(path) {
+    const data = await this.api('GET', this.contentsPath(path));
+    return Array.isArray(data) ? data.filter((f) => f.type === 'file').map((f) => f.name) : [];
+  }
+
   async createUpload(buffer) {
     const data = await this.api('POST', '/git/blobs', { content: buffer.toString('base64'), encoding: 'base64' });
     return data.sha;
@@ -136,6 +142,15 @@ export class LocalStore {
       return await readFile(join(this.root, path));
     } catch {
       return null;
+    }
+  }
+
+  async listDir(path) {
+    try {
+      const entries = await readdir(join(this.root, path), { withFileTypes: true });
+      return entries.filter((e) => e.isFile()).map((e) => e.name);
+    } catch {
+      return [];
     }
   }
 

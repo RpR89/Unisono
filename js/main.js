@@ -33,6 +33,13 @@
     });
   }
 
+  // Numero di articoli nel carrello, accanto all'icona nel menu
+  try {
+    var carrello = JSON.parse(localStorage.getItem('unisono-carrello') || '[]');
+    var pezzi = carrello.reduce(function (t, r) { return t + (r.quantita || 0); }, 0);
+    document.querySelectorAll('.cart-count').forEach(function (el) { el.textContent = pezzi; el.hidden = !pezzi; });
+  } catch (e) { /* navigazione privata */ }
+
   // Header trasparente in home che diventa scuro scorrendo + pulsante "torna su"
   function onScroll() {
     var y = window.scrollY;

@@ -13,11 +13,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export async function loadContent(root = ROOT) {
   const siteText = await readFile(join(root, 'content/site.json'), 'utf8');
   const eventiText = await readFile(join(root, 'content/eventi.json'), 'utf8');
+  const shopText = await readFile(join(root, 'content/shop.json'), 'utf8');
   return {
     site: JSON.parse(siteText),
     eventi: JSON.parse(eventiText),
+    shop: JSON.parse(shopText),
     // Versione dei contenuti: il pannello la usa per sapere quando le modifiche sono online
-    versione: { site: gitBlobSha(siteText), eventi: gitBlobSha(eventiText) },
+    versione: { site: gitBlobSha(siteText), eventi: gitBlobSha(eventiText), shop: gitBlobSha(shopText) },
   };
 }
 

@@ -1,7 +1,8 @@
 // Pannello di gestione dei contenuti di UNISONO Factory.
 
 import { renderPage, slugify, RESERVED_SLUGS, eventPath, sortEvents, formatDateRange, isPast, todayInItaly } from '/lib/render.mjs';
-import { SECTIONS, EVENT_FIELDS, LINK_OPTIONS } from '/lib/schema.mjs';
+import { SECTIONS, EVENT_FIELDS, LINK_OPTIONS, SHOP_SECTION, PRODUCT_FIELDS } from '/lib/schema.mjs';
+import { formatEuro, STATI_ORDINE } from '/lib/shop.mjs';
 import { sanitizeRich } from '/lib/sanitize.mjs';
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -170,12 +171,13 @@ async function start() {
   if (!state.draft) {
     $('#editor').innerHTML = '<p class="loading">Caricamento dei contenuti…</p>';
     const data = await api('GET', '/api/content');
-    state.draft = { site: data.site, eventi: data.eventi };
+    state.draft = { site: data.site, eventi: data.eventi, shop: data.shop };
     state.saved = JSON.stringify(state.draft);
     state.versione = data.versione;
   }
   renderNav();
   showSection(state.section);
+  refreshOrderBadge();
 }
 
 // ---------------------------------------------------------------- Navigazione
@@ -184,8 +186,13 @@ const NAV = [
   { id: 'eventi', titolo: 'Locandine ed eventi', icona: '▦' },
   ...SECTIONS.map((s) => ({ id: s.id, titolo: s.titolo, icona: s.icona })),
   { sep: true },
+  { id: 'prodotti', titolo: 'Shop · Prodotti', icona: '♫' },
+  { id: SHOP_SECTION.id, titolo: SHOP_SECTION.titolo, icona: SHOP_SECTION.icona },
+  { id: 'ordini', titolo: 'Ordini', icona: '✉' },
+  { sep: true },
   { id: 'utenti', titolo: 'Utenti', icona: '☺' },
 ];
+const ALL_SECTIONS = [...SECTIONS, SHOP_SECTION];
 
 function renderNav() {
   const nav = $('#nav');
@@ -196,13 +203,15 @@ function renderNav() {
       type: 'button',
       class: item.id === state.section ? 'active' : '',
       onclick: () => showSection(item.id),
-    }, el('span', { class: 'ico', text: item.icona }), item.titolo));
+    }, el('span', { class: 'ico', text: item.icona }), item.titolo,
+      item.id === 'ordini' && state.nuoviOrdini ? el('span', { class: 'nav-badge', text: state.nuoviOrdini }) : null));
   }
 }
 
-function showSection(id, { eventSlug = null } = {}) {
+function showSection(id, { eventSlug = null, productId = null } = {}) {
   state.section = id;
   state.eventSlug = eventSlug;
+  state.productId = productId;
   state.anchor = null;
   $('#app').classList.remove('nav-open');
   renderNav();
@@ -214,8 +223,13 @@ function showSection(id, { eventSlug = null } = {}) {
     else renderEventList(editor);
   } else if (id === 'utenti') {
     renderUsers(editor);
+  } else if (id === 'prodotti') {
+    if (productId) renderProductEditor(editor, productId);
+    else renderProductList(editor);
+  } else if (id === 'ordini') {
+    renderOrders(editor);
   } else {
-    renderSchemaSection(editor, SECTIONS.find((s) => s.id === id));
+    renderSchemaSection(editor, ALL_SECTIONS.find((s) => s.id === id));
   }
   updatePreview(true);
 }
@@ -307,6 +321,7 @@ async function publish() {
     state.saved = JSON.stringify(state.draft);
     state.uploads.clear();
     state.newSlugs.clear();
+    state.newProducts?.clear();
     if (state.section === 'eventi') showSection('eventi', { eventSlug: state.eventSlug });
     setStatus('Pubblicato. Il sito online si aggiorna tra circa un minuto…', 'ok');
     toast('Modifiche pubblicate!');
@@ -334,7 +349,7 @@ function waitOnline(versione) {
     try {
       const res = await fetch('/version.json?t=' + Date.now(), { cache: 'no-store' });
       const v = await res.json();
-      if (v.site === versione.site && v.eventi === versione.eventi) {
+      if (v.site === versione.site && v.eventi === versione.eventi && (!versione.shop || v.shop === versione.shop)) {
         setStatus('Pubblicato e online ✓', 'ok');
         updatePreview();
         return;
@@ -363,12 +378,16 @@ let previewId = null;
 let pendingScroll = null;
 
 function previewTarget() {
-  if (state.section === 'utenti') return null;
+  if (state.section === 'utenti' || state.section === 'ordini') return null;
+  if (state.section === 'prodotti') {
+    const p = state.productId && state.draft.shop.prodotti.find((x) => x.id === state.productId);
+    return p && p.visibile !== false ? 'prodotto:' + p.id : 'shop';
+  }
   if (state.section === 'eventi') {
     if (state.eventSlug && state.eventPreview === 'page') return 'evento:' + state.eventSlug;
     return 'home';
   }
-  return SECTIONS.find((s) => s.id === state.section)?.anteprima || 'home';
+  return ALL_SECTIONS.find((s) => s.id === state.section)?.anteprima || 'home';
 }
 
 function updatePreview(now = false) {
@@ -522,6 +541,11 @@ function field(def, value, onChange) {
       return wrap(label, mediaField(def, value, onChange, 'pdf'), def.aiuto);
     case 'images':
       return wrap(label, galleryField(def, value || [], onChange), def.aiuto);
+    case 'number': {
+      const input = el('input', { type: 'number', min: '0', step: '0.01', value: value ?? '', inputmode: 'decimal' });
+      input.addEventListener('input', () => onChange(input.value === '' ? '' : Number(input.value)));
+      return wrap(label, input, def.aiuto);
+    }
     case 'date': {
       const input = el('input', { type: 'date', value: value || '' });
       input.addEventListener('change', () => onChange(input.value));
@@ -722,7 +746,8 @@ function renderSchemaSection(root, section) {
   setTitle(section.titolo);
   root.append(el('p', { class: 'intro', text: 'Apri una sezione e modifica i campi: l\'anteprima a destra si aggiorna subito. Quando hai finito premi "Pubblica".' }));
   section.gruppi.forEach((g, gi) => {
-    const data = getPath(state.draft.site, g.path);
+    const base = section.root ? state.draft[section.root] : state.draft.site;
+    const data = g.path ? getPath(base, g.path) : base;
     const body = el('div', { class: 'group-body' },
       g.aiuto ? el('p', { class: 'help', text: g.aiuto }) : null,
       g.campi.map((f) => field(f, data[f.k], (v) => { data[f.k] = v; changed(); })));
@@ -976,3 +1001,180 @@ async function passwordDialog(title) {
     showLogin('Il pannello non è raggiungibile');
   }
 })();
+
+
+// ---------------------------------------------------------------- Shop: prodotti
+
+function products() {
+  return state.draft.shop.prodotti;
+}
+
+function uniqueProductId(base, except) {
+  let id = slugify(base);
+  if (id === 'carrello') id = 'carrello-1';
+  const start = id;
+  let n = 2;
+  while (products().some((p) => p.id === id && p !== except)) id = `${start}-${n++}`;
+  return id;
+}
+
+function renderProductList(root) {
+  setTitle('Shop · Prodotti');
+  root.append(
+    el('p', { class: 'intro', text: 'Gli articoli in vendita nello shop. Clicca un prodotto per modificarlo; usa le frecce per cambiare l\'ordine in cui compaiono.' }),
+    el('div', { class: 'ev-toolbar' }, el('button', { type: 'button', class: 'btn btn-primary', onclick: addProduct }, '+ Nuovo prodotto')),
+  );
+  const list = products();
+  if (!list.length) { root.append(el('p', { class: 'help', text: 'Nessun prodotto.' })); return; }
+  root.append(el('div', { class: 'ev-grid' }, list.map((p, i) => el('div', {
+    class: 'ev-card' + (p.visibile === false ? ' hidden-ev' : ''),
+    onclick: () => showSection('prodotti', { productId: p.id }),
+  },
+    el('div', { class: 'ev-poster', style: (p.immagini || [])[0] ? { backgroundImage: `url("${resolveAsset(p.immagini[0])}")`, aspectRatio: '1 / 1' } : { aspectRatio: '1 / 1' } }, (p.immagini || [])[0] ? '' : 'Senza foto'),
+    el('div', { class: 'ev-info' },
+      el('div', { class: 'ev-title', text: p.nome || '(senza nome)' }),
+      el('div', { class: 'ev-date', text: p.prezzo !== '' && p.prezzo != null ? formatEuro(p.prezzo) : 'Prezzo da inserire' }),
+      el('div', { class: 'badges' },
+        p.visibile === false ? el('span', { class: 'badge off', text: 'Nascosto' }) : null,
+        p.disponibile === false ? el('span', { class: 'badge off', text: 'Non disponibile' }) : null,
+        p.scorte !== '' && p.scorte != null ? el('span', { class: 'badge', text: `${p.scorte} pz` }) : null,
+        state.newProducts?.has(p.id) ? el('span', { class: 'badge new', text: 'Da pubblicare' }) : null)),
+    el('div', { class: 'ev-move' },
+      el('button', { type: 'button', title: 'Sposta prima', disabled: i === 0, onclick: (e) => { e.stopPropagation(); [list[i - 1], list[i]] = [list[i], list[i - 1]]; changed(); showSection('prodotti'); } }, '◀'),
+      el('button', { type: 'button', title: 'Sposta dopo', disabled: i === list.length - 1, onclick: (e) => { e.stopPropagation(); [list[i + 1], list[i]] = [list[i], list[i + 1]]; changed(); showSection('prodotti'); } }, '▶')),
+  ))));
+}
+
+function addProduct() {
+  state.newProducts = state.newProducts || new Set();
+  const p = {
+    id: uniqueProductId('nuovo-prodotto'),
+    nome: 'Nuovo prodotto', categoria: 'vinile', prezzo: '', sottotitolo: '', immagini: [],
+    descrizione: '<p>Descrizione del prodotto.</p>', nome_variante: '', varianti: '', scorte: '', disponibile: true, visibile: true,
+  };
+  products().unshift(p);
+  state.newProducts.add(p.id);
+  changed();
+  showSection('prodotti', { productId: p.id });
+}
+
+function renderProductEditor(root, id) {
+  const p = products().find((x) => x.id === id);
+  if (!p) return renderProductList(root);
+  state.newProducts = state.newProducts || new Set();
+  setTitle(p.nome || 'Prodotto');
+  const url = el('p', { class: 'ev-url' });
+  const drawUrl = () => { url.textContent = `Indirizzo della pagina: ${location.origin}/shop/${p.id}/` + (state.newProducts.has(p.id) ? ' (si crea dal nome)' : ''); };
+  drawUrl();
+  root.append(
+    el('button', { type: 'button', class: 'btn btn-sm btn-ghost back', onclick: () => showSection('prodotti') }, '← Tutti i prodotti'),
+    url,
+    el('div', { class: 'group' }, el('div', { class: 'group-body', style: { paddingTop: '16px' } },
+      PRODUCT_FIELDS.map((f) => field(f, p[f.k], (v) => {
+        p[f.k] = v;
+        if (f.k === 'nome') {
+          setTitle(v || 'Prodotto');
+          if (state.newProducts.has(p.id)) {
+            state.newProducts.delete(p.id);
+            p.id = uniqueProductId(v || 'prodotto', p);
+            state.newProducts.add(p.id);
+            state.productId = p.id;
+            drawUrl();
+          }
+        }
+        changed();
+      })))),
+    el('div', { class: 'danger-zone' },
+      el('button', { type: 'button', class: 'btn btn-danger', onclick: async () => {
+        if (!(await confirmDialog('Eliminare il prodotto?', `"${p.nome}" verrà tolto dallo shop alla prossima pubblicazione. Se vuoi solo nasconderlo, togli la spunta "Mostra nello shop".`, 'Elimina', true))) return;
+        products().splice(products().indexOf(p), 1);
+        changed();
+        showSection('prodotti');
+      } }, 'Elimina prodotto')),
+  );
+}
+
+// ---------------------------------------------------------------- Shop: ordini
+
+const STATO_LABEL = Object.fromEntries(STATI_ORDINE);
+
+function fmtDate(iso) {
+  try {
+    return new Date(iso).toLocaleString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  } catch { return iso; }
+}
+
+async function refreshOrderBadge() {
+  try {
+    const data = await api('GET', '/api/ordini');
+    state.nuoviOrdini = data.ordini.filter((o) => o.stato === 'nuovo').length;
+    renderNav();
+    return data.ordini;
+  } catch { return null; }
+}
+
+async function renderOrders(root) {
+  setTitle('Ordini');
+  root.append(el('p', { class: 'intro', text: 'Gli ordini arrivati dallo shop, dal più recente. Quando ricevi il bonifico segna l\'ordine come "Pagato", poi come "Spedito". Le modifiche agli ordini si salvano subito.' }));
+  const box = el('div', {}, el('p', { class: 'loading', text: 'Caricamento degli ordini…' }));
+  root.append(box);
+  const ordini = await refreshOrderBadge();
+  box.innerHTML = '';
+  if (!ordini) { box.append(el('p', { class: 'loading', text: 'Non è stato possibile caricare gli ordini.' })); return; }
+  if (!ordini.length) { box.append(el('p', { class: 'loading', text: 'Ancora nessun ordine.' })); return; }
+  const filtro = el('select', {}, el('option', { value: '' }, 'Tutti gli stati'), STATI_ORDINE.map(([v, t]) => el('option', { value: v }, t)));
+  const list = el('div', { class: 'orders' });
+  const draw = () => {
+    list.innerHTML = '';
+    ordini.filter((o) => !filtro.value || o.stato === filtro.value).forEach((o) => list.append(orderCard(o)));
+  };
+  filtro.addEventListener('change', draw);
+  box.append(el('div', { class: 'field', style: { maxWidth: '260px', marginBottom: '12px' } }, filtro), list);
+  draw();
+}
+
+function orderCard(o) {
+  if (o.illeggibile) return el('div', { class: 'order' }, el('p', { text: `${o.numero}: ordine non leggibile (la chiave SESSION_SECRET è cambiata?)` }));
+  const cliente = `${o.cliente.nome} ${o.cliente.cognome}`;
+  const stato = el('select', {}, STATI_ORDINE.map(([v, t]) => el('option', { value: v, selected: v === o.stato }, t)));
+  const nota = el('textarea', { rows: 2, placeholder: 'Note interne (non visibili al cliente)' });
+  nota.value = o.nota_interna || '';
+  const save = el('button', { type: 'button', class: 'btn btn-sm btn-primary', onclick: async () => {
+    save.disabled = true;
+    try {
+      const res = await api('PATCH', '/api/ordini', { numero: o.numero, stato: stato.value, nota_interna: nota.value });
+      Object.assign(o, res.ordine);
+      badge.textContent = STATO_LABEL[o.stato];
+      badge.className = 'badge stato-' + o.stato;
+      toast('Ordine aggiornato');
+      refreshOrderBadge();
+    } catch (err) { toast(err.message, { error: true, ms: 7000 }); }
+    save.disabled = false;
+  } }, 'Salva');
+  const badge = el('span', { class: 'badge stato-' + o.stato, text: STATO_LABEL[o.stato] });
+  const tel = String(o.cliente.telefono || '').replace(/[^0-9+]/g, '');
+  const waNum = tel.startsWith('+') ? tel.slice(1) : (tel.startsWith('00') ? tel.slice(2) : '39' + tel);
+  const msgPagato = `Ciao ${o.cliente.nome}, abbiamo ricevuto il bonifico per l'ordine ${o.numero}. Grazie! ${o.consegna === 'spedizione' ? 'Ti avviseremo appena spedito.' : 'Ti aspettiamo a Palazzo Guarnieri per il ritiro.'}`;
+  return el('details', { class: 'order item' },
+    el('summary', {},
+      el('span', { class: 't' }, `${o.numero} · ${cliente}`),
+      el('span', { class: 'order-total', text: formatEuro(o.totale) }),
+      badge),
+    el('div', { class: 'item-body' },
+      el('p', { class: 'help', text: `Ricevuto il ${fmtDate(o.data)}${o.aggiornato ? ` · aggiornato da ${o.aggiornato_da}` : ''}` }),
+      el('table', { class: 'order-lines' },
+        o.righe.map((r) => el('tr', {}, el('td', {}, `${r.quantita} × ${r.nome}${r.variante ? ` (${r.variante})` : ''}`), el('td', { text: formatEuro(r.importo) }))),
+        el('tr', {}, el('td', { text: o.consegna === 'spedizione' ? 'Spedizione' : 'Ritiro a Palazzo Guarnieri' }), el('td', { text: o.spedizione ? formatEuro(o.spedizione) : 'Gratis' })),
+        el('tr', { class: 'tot' }, el('td', { text: 'Totale' }), el('td', { text: formatEuro(o.totale) }))),
+      el('div', { class: 'order-cols' },
+        el('div', {}, el('strong', { text: 'Cliente' }), el('p', {}, cliente, el('br'), el('a', { href: `mailto:${o.cliente.email}` }, o.cliente.email), el('br'), el('a', { href: `tel:${tel}` }, o.cliente.telefono))),
+        o.indirizzo ? el('div', {}, el('strong', { text: 'Spedire a' }), el('p', {}, cliente, el('br'), o.indirizzo.via, el('br'), `${o.indirizzo.cap} ${o.indirizzo.citta} (${o.indirizzo.provincia})`)) : null),
+      o.note ? el('p', {}, el('strong', { text: 'Note del cliente: ' }), o.note) : null,
+      el('div', { class: 'field' }, el('span', { class: 'label', text: 'Stato' }), stato),
+      el('div', { class: 'field' }, nota),
+      el('div', { class: 'media-actions' },
+        save,
+        el('a', { class: 'btn btn-sm', href: `https://wa.me/${waNum}?text=${encodeURIComponent(msgPagato)}`, target: '_blank', rel: 'noopener' }, 'WhatsApp al cliente'),
+        el('a', { class: 'btn btn-sm btn-ghost', href: `mailto:${o.cliente.email}?subject=${encodeURIComponent('Il tuo ordine ' + o.numero)}&body=${encodeURIComponent(msgPagato)}` }, 'Email al cliente')),
+    ));
+}

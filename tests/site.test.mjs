@@ -13,7 +13,9 @@ import { validateContent, isAssetPath } from '../lib/validate.mjs';
 import { build, loadContent } from '../scripts/build.mjs';
 import { createSessionToken, verifySessionToken, hashPassword, verifyPassword } from '../api/_lib/auth.js';
 import { encryptUsers, decryptUsers } from '../api/_lib/users.js';
-import { GitHubStore, gitBlobSha } from '../api/_lib/store.js';
+import { GitHubStore, LocalStore, gitBlobSha, setStore } from '../api/_lib/store.js';
+import { computeOrder, formatEuro } from '../lib/shop.mjs';
+import { createOrder, listOrders, updateOrder } from '../api/_lib/ordini.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -275,4 +277,81 @@ test('con l\'ottimizzazione le immagini passano dal servizio di Vercel', async (
   assert.match(html, /srcset="[^"]*w=384&amp;q=75 384w/);
   assert.match(html, /onerror=/);
   assert.doesNotMatch(renderPage('evento:m-s-s-m', content), /_vercel\/image/);
+});
+
+// ---------------------------------------------------------------- Shop
+
+function shopDiProva() {
+  return {
+    impostazioni: { spedizione_costo: 7, spedizione_gratis_sopra: 50, ritiro_attivo: true, iban: 'IT60X0542811101000000123456', intestatario: 'UNISONO S.R.L.', causale: 'Ordine {numero}' },
+    prodotti: [
+      { id: 'disco', nome: 'Disco', prezzo: 20, disponibile: true, visibile: true, scorte: '' },
+      { id: 'maglia', nome: 'Maglia', prezzo: 15, nome_variante: 'Taglia', varianti: 'S, M, L', disponibile: true, visibile: true, scorte: 2 },
+      { id: 'senza-prezzo', nome: 'In arrivo', prezzo: '', disponibile: true, visibile: true },
+    ],
+  };
+}
+
+test('computeOrder calcola totali, spedizione e controlla varianti e scorte', () => {
+  const shop = shopDiProva();
+  const a = computeOrder(shop, [{ id: 'disco', quantita: 2 }], 'spedizione');
+  assert.deepEqual([a.subtotale, a.spedizione, a.totale, a.errori.length], [40, 7, 47, 0]);
+  assert.equal(computeOrder(shop, [{ id: 'disco', quantita: 3 }], 'spedizione').spedizione, 0); // gratis sopra 50
+  assert.equal(computeOrder(shop, [{ id: 'disco', quantita: 1 }], 'ritiro').spedizione, 0);
+  assert.ok(computeOrder(shop, [{ id: 'maglia', quantita: 1 }], 'ritiro').errori.length); // manca la taglia
+  assert.ok(computeOrder(shop, [{ id: 'maglia', variante: 'M', quantita: 3 }], 'ritiro').errori.some((e) => e.includes('restano solo 2')));
+  assert.ok(computeOrder(shop, [{ id: 'senza-prezzo', quantita: 1 }], 'ritiro').errori.length);
+  // il prezzo inviato dal browser viene ignorato
+  assert.equal(computeOrder(shop, [{ id: 'disco', quantita: 1, prezzo: 0.01 }], 'ritiro').totale, 20);
+  assert.equal(formatEuro(1234.5), '€ 1.234,50');
+});
+
+test('gli ordini vengono salvati cifrati, letti e aggiornati; le scorte scendono', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'unisono-shop-'));
+  try {
+    await mkdir(join(dir, 'content'), { recursive: true });
+    const { writeFile } = await import('node:fs/promises');
+    await writeFile(join(dir, 'content/shop.json'), JSON.stringify(shopDiProva()));
+    setStore(new LocalStore({ root: dir }));
+    const body = {
+      cliente: { nome: 'Mario', cognome: 'Rossi', email: 'mario@example.com', telefono: '333 1234567' },
+      consegna: 'spedizione', indirizzo: { via: 'Via Roma 1', cap: '32032', citta: 'Feltre', provincia: 'bl' },
+      righe: [{ id: 'maglia', variante: 'M', quantita: 2, prezzo: 1 }], condizioni: true,
+    };
+    const res = await createOrder(body);
+    assert.match(res.numero, /^U\d{6}-[A-Z0-9]{4}$/);
+    assert.equal(res.totale, 37);
+    assert.equal(res.bonifico.causale, `Ordine ${res.numero}`);
+    const raw = await readFile(join(dir, `content/ordini/${res.numero}.enc.json`), 'utf8');
+    assert.doesNotMatch(raw, /Mario|Feltre|example/);
+    const shop = JSON.parse(await readFile(join(dir, 'content/shop.json'), 'utf8'));
+    assert.equal(shop.prodotti.find((p) => p.id === 'maglia').scorte, 0);
+    await assert.rejects(createOrder(body), (e) => e.status === 400); // esaurito
+    await assert.rejects(createOrder({ ...body, sito_web: 'spam' }), (e) => e.status === 400);
+    await assert.rejects(createOrder({ ...body, condizioni: false }), (e) => e.status === 400);
+    const ordini = await listOrders();
+    assert.equal(ordini.length, 1);
+    assert.equal(ordini[0].indirizzo.provincia, 'BL');
+    const agg = await updateOrder(res.numero, { stato: 'pagato' }, 'admin');
+    assert.equal(agg.stato, 'pagato');
+    await assert.rejects(updateOrder('../site', { stato: 'pagato' }, 'admin'), (e) => e.status === 400);
+  } finally {
+    setStore(null);
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('le pagine dello shop vengono generate', async () => {
+  const content = await loadContent(ROOT);
+  const pages = renderSite(content).map((p) => p.path);
+  assert.ok(pages.includes('shop/index.html'));
+  assert.ok(pages.includes('shop/carrello/index.html'));
+  assert.ok(pages.includes('shop/solitude-danilo-memoli/index.html'));
+  assert.ok(pages.includes('condizioni-di-vendita/index.html'));
+  const prodotto = renderPage('prodotto:solitude-danilo-memoli', content);
+  assert.match(prodotto, /"@type":"Product"/);
+  const conPrezzo = structuredClone(content);
+  conPrezzo.shop.prodotti[0].prezzo = 25;
+  assert.match(renderPage('shop', conPrezzo), /€ 25,00/);
+  assert.match(renderPage('shop', conPrezzo), /add-to-cart/);
 });

@@ -15,6 +15,9 @@ Si entra da `/admin/` con nome utente e password. Dal pannello si possono:
 - **Home, Jazz Cafè, Scuola & Corsi, Unisono Studios, Music Ambassador Award**: cambiare testi,
   foto, sfondi, slideshow, masterclass e PDF di ogni sezione.
 - **Contatti e piè di pagina**: telefono, email, social, dati della società, modulo di contatto, loghi.
+- **Shop · Prodotti**: vinili, CD, t-shirt… con foto, prezzo, taglie e pezzi disponibili.
+- **Shop · Impostazioni**: IBAN per il bonifico, costo della spedizione, ritiro a Palazzo Guarnieri, condizioni di vendita.
+- **Ordini**: gli ordini arrivati dallo shop, con i dati del cliente e lo stato (nuovo, pagato, spedito, annullato).
 - **Utenti**: aggiungere o togliere le persone che possono entrare e cambiare le loro password.
 
 A destra c'è l'**anteprima dal vivo** della pagina, in versione computer o telefono.
@@ -49,11 +52,27 @@ Dopo aver aggiunto o cambiato le variabili, su Vercel apri *Deployments* e fai *
 L'amministratore principale non si può eliminare dal pannello e la sua password si cambia solo su Vercel:
 serve anche per rientrare se qualcuno perde la propria password.
 
+## Shop
+
+Pagine: `/shop/` (elenco), `/shop/<prodotto>/` (scheda), `/shop/carrello/` (carrello e ordine),
+`/condizioni-di-vendita/`.
+
+- Il carrello resta nel browser del cliente finché non invia l'ordine.
+- Il server ricalcola sempre prezzi, spedizione e totale dai prodotti salvati: i prezzi inviati dal browser non contano.
+- Pagamento: bonifico bancario. Dopo l'ordine il cliente vede numero d'ordine, totale, IBAN e causale,
+  e può inviare l'ordine anche su WhatsApp.
+- Gli ordini sono salvati **cifrati** in `content/ordini/` (il repository è pubblico) e si gestiscono dalla sezione *Ordini* del pannello.
+  Un nuovo ordine non fa ripubblicare il sito (vedi `ignoreCommand` in `vercel.json`).
+- Se per un prodotto si indicano i pezzi disponibili, scendono a ogni ordine; a zero il prodotto risulta esaurito.
+- Un prodotto senza prezzo mostra "Prezzo in arrivo" e non si può comprare.
+
 ## Come funziona
 
 ```
 content/site.json      testi e immagini di tutte le pagine
 content/eventi.json    locandine, eventi e novità
+content/shop.json      prodotti e impostazioni dello shop
+content/ordini/        ordini dello shop (cifrati)
 content/utenti.enc.json  utenti del pannello (cifrato: il repository è pubblico)
 assets/img, assets/pdf   foto e documenti originali
 assets/uploads/          file caricati dal pannello

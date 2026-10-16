@@ -49,5 +49,6 @@
         "search": ""
       }
     ]
-  }
+  },
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)content/ordini' ':(exclude)content/utenti.enc.json'"
 }

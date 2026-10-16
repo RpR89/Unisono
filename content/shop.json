@@ -1,0 +1,56 @@
+{
+  "pagina": {
+    "etichetta": "Unisono Records · Merchandising",
+    "titolo": "Shop",
+    "testo": "<p>Vinili, dischi e merchandising di Unisono. Paghi con bonifico bancario e ricevi a casa, oppure ritiri a Palazzo Guarnieri.</p>",
+    "sfondo": "assets/img/4_sfumata.jpg",
+    "descrizione": "Lo shop di UNISONO Factory: vinili e dischi di Unisono Records registrati dal vivo a Palazzo Guarnieri, e merchandising."
+  },
+  "impostazioni": {
+    "intestatario": "UNISONO S.R.L.",
+    "iban": "",
+    "banca": "",
+    "causale": "Ordine {numero}",
+    "testo_bonifico": "<p>Effettua il bonifico entro 7 giorni indicando nella causale il numero d’ordine. Appena lo riceviamo prepariamo la spedizione e ti avvisiamo.</p>",
+    "spedizione_costo": 7,
+    "spedizione_gratis_sopra": 0,
+    "spedizione_tempi": "Spedizione in Italia in 3-5 giorni lavorativi dal ricevimento del bonifico.",
+    "ritiro_attivo": true,
+    "ritiro_testo": "Ritiro gratuito a Palazzo Guarnieri, Feltre (BL), su appuntamento."
+  },
+  "prodotti": [
+    {
+      "id": "new-direction-live-at-unisono-studios",
+      "nome": "New Direction – Live at Unisono Studios",
+      "categoria": "vinile",
+      "prezzo": "",
+      "sottotitolo": "Live at Unisono Studios",
+      "immagini": [
+        "assets/img/UNISONOn1_0.5-cover1.jpg-scaled.jpeg"
+      ],
+      "descrizione": "<p>“New Direction”, registrato dal vivo nelle sale di Unisono Studios a Palazzo Guarnieri. Disponibile anche sulle piattaforme di streaming dal 10 aprile.</p>",
+      "nome_variante": "",
+      "varianti": "",
+      "scorte": "",
+      "disponibile": true,
+      "visibile": true
+    },
+    {
+      "id": "solitude-danilo-memoli",
+      "nome": "Solitude – Danilo Memoli",
+      "categoria": "vinile",
+      "prezzo": "",
+      "sottotitolo": "Piano solo dedicato a Duke Ellington e Billy Strayhorn",
+      "immagini": [
+        "assets/img/WhatsApp-Image-2026-03-13-at-08.49.29.jpeg"
+      ],
+      "descrizione": "<p>Il disco, un piano solo eseguito dal virtuoso pianista Danilo Memoli sul pianoforte Bluthner degli anni Venti, è registrato in alta risoluzione e interamente dedicato a Duke Ellington e Billy Strayhorn. La registrazione e il mixaggio portano la firma del noto tecnico del suono Stefano Amerio e dello studio Artesuono (Udine).</p><p>Prodotto da <strong>Unisono Records</strong>, etichetta indipendente specializzata nei “live recording” con studio di registrazione al secondo piano di Palazzo Guarnieri a Feltre.</p>",
+      "nome_variante": "",
+      "varianti": "",
+      "scorte": "",
+      "disponibile": true,
+      "visibile": true
+    }
+  ],
+  "condizioni": "<p><strong>Ultimo aggiornamento:</strong> ottobre 2026</p>\n<h2>Venditore</h2>\n<p>UNISONO S.R.L., Piazza Vittorio Emanuele, 4 – 32032 Feltre (BL), P.IVA e C.F. 01043840253, PEC unisono@pec.it, email <a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a>, telefono 388 7884850.</p>\n<h2>Ordini</h2>\n<p>L’ordine si invia dalla pagina del carrello. Dopo l’invio ricevi il numero d’ordine, il totale e le coordinate per il bonifico. Il contratto si conclude quando confermiamo l’ordine e riceviamo il pagamento.</p>\n<h2>Prezzi e pagamento</h2>\n<p>I prezzi sono in euro e comprendono l’IVA. Le spese di spedizione sono indicate nel carrello prima dell’invio dell’ordine. Il pagamento avviene con bonifico bancario anticipato, indicando il numero d’ordine nella causale. Se il bonifico non arriva entro 7 giorni, l’ordine può essere annullato.</p>\n<h2>Spedizione e ritiro</h2>\n<p>Spediamo in Italia dopo aver ricevuto il pagamento. In alternativa puoi ritirare gratuitamente l’ordine a Palazzo Guarnieri, a Feltre, concordando giorno e ora.</p>\n<h2>Diritto di recesso</h2>\n<p>Hai 14 giorni dalla consegna per restituire gli articoli senza indicarne il motivo (artt. 52 e seguenti del Codice del Consumo), scrivendo a <a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a>. Gli articoli vanno restituiti integri entro 14 giorni dalla comunicazione; le spese di restituzione sono a tuo carico. Rimborsiamo l’importo pagato entro 14 giorni dal ricevimento della merce. Il recesso è escluso per CD e vinili sigillati che sono stati aperti dopo la consegna (art. 59 lett. i del Codice del Consumo).</p>\n<h2>Garanzia</h2>\n<p>Per i prodotti difettosi vale la garanzia legale di conformità di 24 mesi prevista dal Codice del Consumo: contattaci e sostituiremo o rimborseremo l’articolo.</p>\n<h2>Reclami e controversie</h2>\n<p>Per qualsiasi problema scrivi a <a href=\"mailto:info@unisonojazz.it\">info@unisonojazz.it</a>. Puoi anche usare la piattaforma europea per la risoluzione online delle controversie: <a href=\"https://ec.europa.eu/consumers/odr\">ec.europa.eu/consumers/odr</a>.</p>"
+}
