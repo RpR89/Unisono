@@ -763,6 +763,7 @@ function addEvent(tipo) {
     titolo,
     locandina: '',
     immagine_home: '',
+    sottotitolo: '',
     data: '',
     data_fine: '',
     orario: tipo === 'novita' ? '' : 'ore 21.30',
@@ -840,7 +841,7 @@ function renderEventEditor(root, slug) {
       onclick: (e) => {
         state.eventPreview = v;
         previewSwitch.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === e.currentTarget));
-        state.anchor = v === 'home' ? (ev.tipo === 'novita' ? '.novita-grid' : '#events') : null;
+        state.anchor = v === 'home' ? (ev.tipo === 'novita' ? '#novita' : '#events') : null;
         updatePreview(true);
       },
     }, t)));

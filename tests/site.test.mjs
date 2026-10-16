@@ -219,16 +219,32 @@ test('gli eventi con data vengono ordinati dal più vicino', () => {
   assert.deepEqual(list.map((e) => e.slug), ['a', 'b', 'c']);
 });
 
-test('gli eventi passati spariscono dalla Home e finiscono in archivio', async () => {
+test('la Home mostra sempre almeno 3 locandine, completando con gli ultimi eventi conclusi', async () => {
   const content = await loadContent(ROOT);
   const home = renderPage('home', content, { today: '2026-10-16' });
-  assert.match(home, /m-s-s-m\/index\.html/);
-  assert.doesNotMatch(home, /rita-marcotulli-ensemble\/index\.html/);
+  assert.match(home, /class="card" data-fine="2026-10-24"/);
+  assert.match(home, /class="card" data-fine="2026-11-02"/);
+  assert.match(home, /class="card is-past" data-fine="2026-04-25">/);
   assert.match(home, /eventi-passati\/index\.html/);
+  // dopo M.S.S.M: 1 in programma + 2 conclusi
+  const dopo = renderPage('home', content, { today: '2026-10-25' });
+  assert.match(dopo, /class="card is-past" data-fine="2026-10-24">/);
+  assert.match(dopo, /class="card is-past" data-fine="2026-04-25">/);
+  // con 3 eventi futuri non compare nessun evento concluso
+  const piu = structuredClone(content);
+  piu.eventi.eventi.push({ slug: 'a', tipo: 'evento', titolo: 'A', data: '2026-12-01', testo: '' }, { slug: 'b', tipo: 'evento', titolo: 'B', data: '2026-12-02', testo: '' });
+  const pieno = renderPage('home', piu, { today: '2026-10-16' });
+  assert.match(pieno, /class="card is-past" data-fine="2026-04-25" hidden>/);
   const archivio = renderPage('archivio', content, { today: '2026-10-16' });
   assert.match(archivio, /<article class="card" data-fine="2026-04-25">/);
-  const dopo = renderPage('home', content, { today: '2026-10-25' });
-  assert.doesNotMatch(dopo, /href="m-s-s-m\/index\.html"/);
+});
+
+test('le novità usano la vetrina con le copertine', async () => {
+  const content = await loadContent(ROOT);
+  const home = renderPage('home', content);
+  assert.match(home, /id="novita"/);
+  assert.match(home, /class="release-cover" href="new-direction-live-at-unisono-studios\/index\.html"/);
+  assert.match(home, /Danilo Memoli · piano solo/);
 });
 
 test('le masterclass concluse non compaiono', async () => {

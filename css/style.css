@@ -422,7 +422,7 @@ main { padding-top: var(--header-h); }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 340px));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 318px));
   justify-content: center;
   gap: 36px;
 }
@@ -1220,3 +1220,148 @@ main { padding-top: var(--header-h); }
   .event-box { padding: 18px; }
   .form-actions .btn { width: 100%; }
 }
+
+/* =========================================================
+   Locandine concluse
+   ========================================================= */
+
+.card-media { position: relative; }
+.badge-past { display: none; }
+.card.is-past .badge-past {
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(20, 22, 24, .85);
+  color: var(--bianco);
+  font-family: var(--font-lato);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.card.is-past .card-media img { filter: grayscale(.65) brightness(.9); }
+.card.is-past .card-date { color: #777; }
+
+/* =========================================================
+   Novità – vetrina Unisono Records
+   ========================================================= */
+
+.novita-section {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0 80px;
+  color: var(--bianco);
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 10%, rgba(212, 17, 30, .28), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(201, 162, 77, .14), transparent 70%),
+    var(--nero);
+}
+
+.novita-head {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-width: 820px;
+  margin: 0 auto 60px;
+}
+.novita-logo-img { width: 150px; flex: none; filter: drop-shadow(0 10px 30px rgba(0, 0, 0, .5)); }
+.novita-head h2 {
+  margin: 0 0 10px;
+  color: var(--bianco);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1;
+}
+.novita-head p { margin: 0; color: rgba(255, 255, 255, .78); font-size: 17px; }
+.eyebrow {
+  margin: 0 0 8px !important;
+  color: #e3b95c !important;
+  font-family: var(--font-lato);
+  font-size: 13px !important;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.releases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
+  justify-content: center;
+  gap: 56px 72px;
+}
+
+.release-cover {
+  position: relative;
+  display: block;
+  width: 82%;
+  aspect-ratio: 1 / 1;
+}
+.release-cover img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+}
+
+/* Il vinile che esce dalla copertina */
+.vinyl {
+  position: absolute;
+  top: 4%;
+  left: 18%;
+  width: 92%;
+  height: 92%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #f2f2f2 0 2.2%, var(--rosso) 2.3% 17%, #111 17.5% 19%, transparent 19.5%),
+    repeating-radial-gradient(circle, #151515 0 1.2%, #232323 1.4% 2.2%),
+    #111;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .6), inset 0 0 0 1px rgba(255, 255, 255, .05);
+  transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+.vinyl::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 30deg, transparent 0 20%, rgba(255, 255, 255, .12) 25%, transparent 32% 70%, rgba(255, 255, 255, .08) 75%, transparent 82%);
+}
+.release:hover .vinyl,
+.release-cover:focus-visible .vinyl { transform: translateX(26%) rotate(140deg); }
+
+.release-info { margin-top: 26px; }
+.release-info h3 { margin: 0 0 6px; font-size: 20px; line-height: 1.3; }
+.release-info h3 a { color: var(--bianco); text-decoration: none; }
+.release-info h3 a:hover { text-decoration: underline; }
+.release-info p { margin: 0 0 16px; color: rgba(255, 255, 255, .7); font-size: 15px; }
+
+.novita-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 28px;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+.novita-foot p { margin: 0; font-size: 18px; color: rgba(255, 255, 255, .85); }
+.novita-foot a { color: var(--bianco); text-decoration: none; }
+.novita-foot .btn { color: var(--bianco); }
+
+@media (max-width: 719px) {
+  .novita-section { padding: 64px 0 56px; }
+  .novita-head { flex-direction: column; text-align: center; gap: 18px; margin-bottom: 44px; }
+  .novita-logo-img { width: 110px; }
+  .release-cover { width: 78%; margin: 0 auto; }
+  .release-info { text-align: center; }
+  /* Su telefono il vinile resta un po' fuori: non c'è il passaggio del mouse */
+  .vinyl { transform: translateX(14%) rotate(60deg); }
+}
+@media (prefers-reduced-motion: reduce) { .vinyl { transition: none; } }

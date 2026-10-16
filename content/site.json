@@ -47,10 +47,12 @@
       "vuoto": "Nuove date in arrivo. Seguici su Instagram o scrivici su WhatsApp per sapere i prossimi concerti."
     },
     "novita": {
-      "titolo": "NOVITA'",
+      "titolo": "Novità",
       "logo": "assets/img/UNISONO_RECORDS_26.png",
-      "info": "PER INFO E ACQUISTI:",
-      "pulsante": "Scopri di più"
+      "info": "Per info e acquisti:",
+      "pulsante": "Scopri di più",
+      "etichetta": "Unisono Records",
+      "testo": "<p>Le produzioni della nostra etichetta, registrate dal vivo nelle sale di Palazzo Guarnieri.</p>"
     },
     "masterclass": {
       "titolo": "MASTERCLASS",

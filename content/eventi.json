@@ -11,7 +11,8 @@
       "data": "2026-11-02",
       "data_fine": "",
       "orario": "Tutto il giorno",
-      "luogo": "Palazzo Guarnieri – Feltre"
+      "luogo": "Palazzo Guarnieri – Feltre",
+      "sottotitolo": ""
     },
     {
       "slug": "m-s-s-m",
@@ -24,7 +25,8 @@
       "data": "2026-10-23",
       "data_fine": "2026-10-24",
       "orario": "Ven 21.30 · Sab 19.30 e 21.30",
-      "luogo": "Modern Hall"
+      "luogo": "Modern Hall",
+      "sottotitolo": ""
     },
     {
       "slug": "rita-marcotulli-ensemble",
@@ -37,7 +39,8 @@
       "data": "2026-04-25",
       "data_fine": "",
       "orario": "Doppio set 19.30 e 21.30",
-      "luogo": "Modern Hall"
+      "luogo": "Modern Hall",
+      "sottotitolo": ""
     },
     {
       "slug": "new-direction-live-at-unisono-studios",
@@ -50,7 +53,8 @@
       "data": "",
       "data_fine": "",
       "orario": "",
-      "luogo": ""
+      "luogo": "",
+      "sottotitolo": "Live at Unisono Studios · in streaming dal 10 aprile"
     },
     {
       "slug": "alvise-bortoloni-2",
@@ -63,7 +67,8 @@
       "data": "",
       "data_fine": "",
       "orario": "",
-      "luogo": ""
+      "luogo": "",
+      "sottotitolo": "Danilo Memoli · piano solo dedicato a Duke Ellington e Billy Strayhorn"
     }
   ]
 }

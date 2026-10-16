@@ -131,7 +131,9 @@
     catch (e) { return new Date().toISOString().slice(0, 10); }
   })();
   var archive = document.querySelector('.archivio');
+  var homeCards = document.querySelector('#events .cards');
   document.querySelectorAll('[data-fine]').forEach(function (el) {
+    if (homeCards && homeCards.contains(el)) return;
     var past = el.getAttribute('data-fine') < today;
     if (el.classList.contains('event-box')) {
       el.querySelector('.event-past').hidden = !past;
@@ -142,9 +144,24 @@
       el.hidden = true;
     }
   });
-  var cards = document.querySelector('#events .cards');
+  // Locandine della Home: gli eventi in programma e, se sono meno di 3, gli ultimi già svolti
+  if (homeCards) {
+    var all = Array.prototype.slice.call(homeCards.querySelectorAll('.card'));
+    var isOver = function (c) { return c.dataset.fine && c.dataset.fine < today; };
+    var upcoming = all.filter(function (c) { return !isOver(c); });
+    var over = all.filter(isOver).sort(function (a, b) { return a.dataset.fine < b.dataset.fine ? 1 : -1; });
+    var fill = Math.max(0, 3 - upcoming.length);
+    upcoming.forEach(function (c) { c.hidden = false; c.classList.remove('is-past'); });
+    over.forEach(function (c, i) {
+      c.classList.add('is-past');
+      c.hidden = i >= fill;
+      var btn = c.querySelector('.btn');
+      if (btn && btn.dataset.labelPast) btn.textContent = btn.dataset.labelPast;
+      homeCards.appendChild(c);
+    });
+  }
   var empty = document.querySelector('#events .cards-empty');
-  if (cards && empty) empty.hidden = !!cards.querySelector('.card:not([hidden])');
+  if (homeCards && empty) empty.hidden = !!homeCards.querySelector('.card:not([hidden])');
 
   // Modulo di contatto: invia il messaggio con WhatsApp oppure con il programma di posta
   document.querySelectorAll('form.contact-form').forEach(function (form) {
